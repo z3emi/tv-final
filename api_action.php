@@ -6,8 +6,8 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$commands_dir = 'R:/live/commands';
-$channels_file = 'C:/nginx/html/channels.txt'; // <--- !! تأكد أن هذا المسار صحيح
+$commands_dir = COMMANDS_DIR;
+$channels_file = CHANNELS_FILE_PATH;
 
 header('Content-Type: application/json');
 
