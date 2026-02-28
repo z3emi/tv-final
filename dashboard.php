@@ -48,11 +48,13 @@
                                 <th>وقت التشغيل</th>
                                 <th>إعادة تشغيل</th>
                                 <th>رابط المصدر</th>
+                                <th>رابط البث</th>
+                                <th>رابط الصوت</th>
                                 <th>إجراءات</th>
                             </tr>
                         </thead>
                         <tbody id="channels-status-table">
-                            <tr><td colspan="7" class="p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">جاري تحميل بيانات البث...</p></td></tr>
+                            <tr><td colspan="9" class="p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">جاري تحميل بيانات البث...</p></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -74,6 +76,16 @@ document.addEventListener('DOMContentLoaded', function() {
         starting: { badge: 'bg-info text-dark', icon: 'bi-hourglass-split' },
         stopped: { badge: 'bg-secondary', icon: 'bi-x-circle-fill' }
     };
+
+
+    function renderLink(url, label) {
+        return `
+            <div class="d-flex flex-column gap-1">
+                <a href="${url}" target="_blank" class="small text-break">${label}</a>
+                <button class="btn btn-sm btn-outline-secondary py-0 copy-link" data-link="${url}">نسخ</button>
+            </div>
+        `;
+    }
 
     function renderActionButtons(channel) {
         if (channel.status_code === 'stopped') {
@@ -120,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td>${channel.uptime}</td>
                             <td><span class="badge bg-dark">${channel.restarts}</span></td>
                             <td><div class="url-truncate" title="${channel.url}">${channel.url}</div></td>
+                            <td>${renderLink(channel.stream_link, 'فتح رابط البث')}</td>
+                            <td>${renderLink(channel.audio_link, 'فتح رابط الصوت')}</td>
                             <td>
                                 <div class="d-flex gap-2 justify-content-center">
                                     ${renderActionButtons(channel)}
@@ -130,11 +144,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     statusTableBody.innerHTML += row;
                 });
             } else {
-                statusTableBody.innerHTML = '<tr><td colspan="7" class="text-center p-4">لم يتم العثور على قنوات في ملف channels.txt.</td></tr>';
+                statusTableBody.innerHTML = '<tr><td colspan="9" class="text-center p-4">لم يتم العثور على قنوات في ملف channels.txt.</td></tr>';
             }
         } catch (error) {
             console.error("Failed to fetch status:", error);
-            statusTableBody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-danger">فشل في تحميل البيانات. تأكد من أن سكربت البث يعمل وأن ملف api_status.php صحيح.</td></tr>`;
+            statusTableBody.innerHTML = `<tr><td colspan="9" class="text-center p-4 text-danger">فشل في تحميل البيانات. تأكد من أن سكربت البث يعمل وأن ملف api_status.php صحيح.</td></tr>`;
         }
     }
     
@@ -175,6 +189,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     statusTableBody.addEventListener('click', function(e) {
+        const copyButton = e.target.closest('button.copy-link');
+        if (copyButton) {
+            navigator.clipboard.writeText(copyButton.dataset.link).then(() => {
+                copyButton.textContent = 'تم النسخ';
+                setTimeout(() => { copyButton.textContent = 'نسخ'; }, 1200);
+            });
+            return;
+        }
+
         const button = e.target.closest('button.action-btn');
         if (button) {
             const action = button.dataset.action;
