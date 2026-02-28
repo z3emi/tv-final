@@ -1,5 +1,28 @@
 <?php
-// ... (بداية الملف كما هي) ...
+require_once 'config.php';
+include 'auth_check.php';
+require_admin();
+
+$website_title = 'Stream System';
+$res = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title' LIMIT 1");
+if ($res && $row = $res->fetch_assoc()) {
+    $website_title = $row['setting_value'] ?: $website_title;
+}
+
+$total_channels = 0;
+$active_channels = 0;
+$total_viewers = 0;
+
+$statsRes = $mysqli->query("SELECT COUNT(*) AS total_channels, SUM(is_active = 1) AS active_channels FROM channels");
+if ($statsRes && $stats = $statsRes->fetch_assoc()) {
+    $total_channels = (int)($stats['total_channels'] ?? 0);
+    $active_channels = (int)($stats['active_channels'] ?? 0);
+}
+
+$viewersRes = $mysqli->query("SELECT COUNT(*) AS total_viewers FROM viewers WHERE last_active > NOW() - INTERVAL 20 SECOND");
+if ($viewersRes && $vw = $viewersRes->fetch_assoc()) {
+    $total_viewers = (int)($vw['total_viewers'] ?? 0);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -19,6 +42,8 @@
         .channel-img-sm { width: 50px; height: 50px; object-fit: contain; background-color: #212529; border-radius: 0.5rem; padding: 5px; box-sizing: border-box; }
         .action-btn { transition: all 0.2s ease-in-out; }
         .action-btn:hover { transform: scale(1.1); }
+        .perf-card .label { font-size: .85rem; color: #6c757d; }
+        .perf-card .value { font-weight: 700; font-size: 1rem; word-break: break-word; }
     </style>
 </head>
 <body>
@@ -30,7 +55,69 @@
         </div>
 
         <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 nav-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-broadcast fs-1 text-primary"></i>
+                        <h6 class="text-muted mt-2 mb-1">إجمالي القنوات</h6>
+                        <h3 class="mb-0"><?= number_format($total_channels) ?></h3>
+                    </div>
+                </div>
             </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 nav-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-play-circle fs-1 text-success"></i>
+                        <h6 class="text-muted mt-2 mb-1">القنوات المفعّلة</h6>
+                        <h3 class="mb-0"><?= number_format($active_channels) ?></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 nav-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people fs-1 text-warning"></i>
+                        <h6 class="text-muted mt-2 mb-1">المشاهدون الآن</h6>
+                        <h3 class="mb-0" id="live-viewers-count"><?= number_format($total_viewers) ?></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-4" id="server-performance-row">
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-cpu me-1"></i>حمل المعالج (1m)</div>
+                        <div class="value" id="server-cpu-load">--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-memory me-1"></i>استخدام الذاكرة</div>
+                        <div class="value" id="server-memory-usage">--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-hdd-network me-1"></i>استخدام القرص</div>
+                        <div class="value" id="server-disk-usage">--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-clock-history me-1"></i>مدة تشغيل السيرفر</div>
+                        <div class="value" id="server-uptime">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="card shadow-sm border-0">
             <div class="card-header d-flex justify-content-between align-items-center bg-light border-0 py-3">
@@ -48,11 +135,13 @@
                                 <th>وقت التشغيل</th>
                                 <th>إعادة تشغيل</th>
                                 <th>رابط المصدر</th>
+                                <th>رابط البث</th>
+                                <th>رابط الصوت</th>
                                 <th>إجراءات</th>
                             </tr>
                         </thead>
                         <tbody id="channels-status-table">
-                            <tr><td colspan="7" class="p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">جاري تحميل بيانات البث...</p></td></tr>
+                            <tr><td colspan="9" class="p-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">جاري تحميل بيانات البث...</p></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -66,6 +155,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const statusTableBody = document.getElementById('channels-status-table');
     const lastUpdateTimeElem = document.getElementById('last-update-time');
+    const serverCpuLoadElem = document.getElementById('server-cpu-load');
+    const serverMemoryUsageElem = document.getElementById('server-memory-usage');
+    const serverDiskUsageElem = document.getElementById('server-disk-usage');
+    const serverUptimeElem = document.getElementById('server-uptime');
 
     const statusClasses = {
         running: { badge: 'bg-success', icon: 'bi-check-circle-fill' },
@@ -74,6 +167,16 @@ document.addEventListener('DOMContentLoaded', function() {
         starting: { badge: 'bg-info text-dark', icon: 'bi-hourglass-split' },
         stopped: { badge: 'bg-secondary', icon: 'bi-x-circle-fill' }
     };
+
+
+    function renderLink(url, label) {
+        return `
+            <div class="d-flex flex-column gap-1">
+                <a href="${url}" target="_blank" class="small text-break">${label}</a>
+                <button class="btn btn-sm btn-outline-secondary py-0 copy-link" data-link="${url}">نسخ</button>
+            </div>
+        `;
+    }
 
     function renderActionButtons(channel) {
         if (channel.status_code === 'stopped') {
@@ -94,6 +197,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function updateServerStats(stats) {
+        if (!stats) {
+            serverCpuLoadElem.textContent = '--';
+            serverMemoryUsageElem.textContent = '--';
+            serverDiskUsageElem.textContent = '--';
+            serverUptimeElem.textContent = '--';
+            return;
+        }
+
+        serverCpuLoadElem.textContent = stats.cpu_load_text || '--';
+        serverMemoryUsageElem.textContent = stats.memory_used_text || '--';
+        serverDiskUsageElem.textContent = stats.disk_used_text || '--';
+        serverUptimeElem.textContent = stats.uptime_text || '--';
+    }
+
     async function fetchStatus() {
         try {
             const response = await fetch('api_status.php');
@@ -103,6 +221,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const updateTime = new Date(data.last_update).toLocaleTimeString('ar-EG');
             lastUpdateTimeElem.innerHTML = `<i class="bi bi-clock-history"></i> آخر تحديث: ${updateTime}`;
             statusTableBody.innerHTML = '';
+            const runningCount = (data.channels || []).filter(c => c.status_code === 'running').length;
+            document.getElementById('live-viewers-count').textContent = new Intl.NumberFormat('ar-EG').format(runningCount);
+
+            updateServerStats(data.server_stats || null);
 
             if (data.channels && data.channels.length > 0) {
                 data.channels.forEach(channel => {
@@ -120,6 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td>${channel.uptime}</td>
                             <td><span class="badge bg-dark">${channel.restarts}</span></td>
                             <td><div class="url-truncate" title="${channel.url}">${channel.url}</div></td>
+                            <td>${renderLink(channel.stream_link, 'فتح رابط البث')}</td>
+                            <td>${renderLink(channel.audio_link, 'فتح رابط الصوت')}</td>
                             <td>
                                 <div class="d-flex gap-2 justify-content-center">
                                     ${renderActionButtons(channel)}
@@ -130,11 +254,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     statusTableBody.innerHTML += row;
                 });
             } else {
-                statusTableBody.innerHTML = '<tr><td colspan="7" class="text-center p-4">لم يتم العثور على قنوات في ملف channels.txt.</td></tr>';
+                statusTableBody.innerHTML = '<tr><td colspan="9" class="text-center p-4">لم يتم العثور على قنوات في ملف channels.txt.</td></tr>';
             }
         } catch (error) {
             console.error("Failed to fetch status:", error);
-            statusTableBody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-danger">فشل في تحميل البيانات. تأكد من أن سكربت البث يعمل وأن ملف api_status.php صحيح.</td></tr>`;
+            updateServerStats(null);
+            statusTableBody.innerHTML = `<tr><td colspan="9" class="text-center p-4 text-danger">فشل في تحميل البيانات. تأكد من أن سكربت البث يعمل وأن ملف api_status.php صحيح.</td></tr>`;
         }
     }
     
@@ -175,6 +300,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     statusTableBody.addEventListener('click', function(e) {
+        const copyButton = e.target.closest('button.copy-link');
+        if (copyButton) {
+            navigator.clipboard.writeText(copyButton.dataset.link).then(() => {
+                copyButton.textContent = 'تم النسخ';
+                setTimeout(() => { copyButton.textContent = 'نسخ'; }, 1200);
+            });
+            return;
+        }
+
         const button = e.target.closest('button.action-btn');
         if (button) {
             const action = button.dataset.action;
