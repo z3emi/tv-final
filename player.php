@@ -71,6 +71,26 @@ if ($audio_url !== '' && !preg_match('~^https?://~i', $audio_url)) {
     $audio_url = "$scheme://$host/$path";
 }
 
+// عند فتح الصفحة عبر HTTPS، بعض المتصفحات تمنع بث HTTP (Mixed Content).
+// نمرر روابط HTTP عبر proxy.php لكي تعمل القنوات بشكل طبيعي.
+function maybe_proxy_insecure_stream(string $streamUrl): string {
+    if ($streamUrl === '' || !preg_match('~^http://~i', $streamUrl)) {
+        return $streamUrl;
+    }
+
+    $isHttpsRequest = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    if (!$isHttpsRequest) {
+        return $streamUrl;
+    }
+
+    return 'proxy.php?url=' . rawurlencode($streamUrl);
+}
+
+$url = maybe_proxy_insecure_stream($url);
+if ($audio_url !== '') {
+    $audio_url = maybe_proxy_insecure_stream($audio_url);
+}
+
 $website_title = 'Player';
 if (isset($mysqli)) {
     $rs = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'");
@@ -319,6 +339,37 @@ document.addEventListener('visibilitychange', () => {
     const AUDIO_URL    = <?= json_encode($audio_url) ?>;
     let audioFallbackTried = false;
 
+    function detectStreamType(url) {
+        if (!url) return 'application/x-mpegURL';
+        if (/\.m3u8($|\?)/i.test(url)) return 'application/x-mpegURL';
+        if (/\.(mp4|m4v)($|\?)/i.test(url)) return 'video/mp4';
+        if (/\.(ts|mpegts)($|\?)/i.test(url)) return 'video/mp2t';
+        // روابط Xtream بدون امتداد غالباً TS مباشر
+        if (!/\.\w+($|\?)/.test(url) && /\/\d+(\/|$|\?)/.test(url)) return 'video/mp2t';
+        return 'application/x-mpegURL';
+    }
+
+    const STREAM_TYPE_CANDIDATES = Array.from(new Set([
+        detectStreamType(STREAM_URL),
+        'application/x-mpegURL',
+        'video/mp2t',
+        'video/mp4'
+    ]));
+    let streamTypeIndex = 0;
+
+    function getCurrentStreamType() {
+        return STREAM_TYPE_CANDIDATES[Math.min(streamTypeIndex, STREAM_TYPE_CANDIDATES.length - 1)];
+    }
+
+    function setStreamSource(url, cacheKey) {
+        const sourceUrl = cacheKey
+            ? (url + (url.includes('?') ? '&' : '?') + cacheKey + '=' + Date.now())
+            : url;
+        const sourceType = getCurrentStreamType();
+        console.log('Setting stream source:', { sourceUrl, sourceType, streamTypeIndex });
+        player.src({ src: sourceUrl, type: sourceType });
+    }
+
     function getViewerId() { 
         let viewerId = localStorage.getItem('viewer_uid'); 
         if (!viewerId) { 
@@ -547,7 +598,7 @@ document.addEventListener('visibilitychange', () => {
                     try {
                         // محاولة تحديث المصدر قبل التشغيل
                         if (isIOS && this.retryCount > 2) {
-                            player.src({ src: STREAM_URL + '?t=' + Date.now(), type: 'application/x-mpegURL' });
+                            setStreamSource(STREAM_URL, 't');
                         }
                         
                         const playPromise = player.play();
@@ -605,11 +656,7 @@ document.addEventListener('visibilitychange', () => {
                     player.reset();
                     
                     // إعادة تعيين المصدر مع timestamp لتجنب cache
-                    const freshUrl = STREAM_URL + (STREAM_URL.includes('?') ? '&' : '?') + 'r=' + Date.now();
-                    player.src({ 
-                        src: freshUrl, 
-                        type: 'application/x-mpegURL' 
-                    });
+                    setStreamSource(STREAM_URL, 'r');
                     
                     player.addClass('vjs-has-started');
                     
@@ -773,11 +820,7 @@ document.addEventListener('visibilitychange', () => {
 
     // تشغيل المصدر مع تحسينات iOS
     function setSrcAndPlay() {
-        const srcUrl = STREAM_URL + (STREAM_URL.includes('?') ? '&' : '?') + 'init=' + Date.now();
-        player.src({
-            src: srcUrl,
-            type: 'application/x-mpegURL'
-        });
+        setStreamSource(STREAM_URL, 'init');
 
         // إعدادات خاصة بـ iOS
         if (isIOS) {
@@ -917,12 +960,24 @@ document.addEventListener('visibilitychange', () => {
     player.on('error', (e) => {
         console.log('Player error:', e, player.error());
 
+        if (streamTypeIndex < STREAM_TYPE_CANDIDATES.length - 1) {
+            streamTypeIndex++;
+            console.log('Retrying with alternate stream type:', getCurrentStreamType());
+            showOverlay(true, true);
+            player.error(null);
+            setStreamSource(STREAM_URL, 'stype');
+            player.play().catch(() => {
+                NetworkWatchdog.onError();
+            });
+            return;
+        }
+
         if (!audioFallbackTried && AUDIO_URL && STREAM_URL !== AUDIO_URL) {
             audioFallbackTried = true;
             console.log('Trying audio-only fallback stream...');
             showOverlay(true, true);
             player.error(null);
-            player.src({ src: AUDIO_URL, type: 'application/x-mpegURL' });
+            player.src({ src: AUDIO_URL, type: detectStreamType(AUDIO_URL) });
             player.play().catch(() => {
                 NetworkWatchdog.onError();
             });
