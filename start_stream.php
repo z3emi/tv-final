@@ -19,7 +19,7 @@ if (!is_numeric($id) || $id <= 0) {
 }
 
 // Connect to the database
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 if ($mysqli->connect_errno) {
     http_response_code(500); // Internal Server Error
     echo "Error: Failed to connect to database.";

@@ -5,7 +5,7 @@ require_once 'config.php';
 // if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
 if (!isset($mysqli)) {
-    $mysqli = new mysqli("localhost", "root", "", "stream_db");
+    $mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 }
 
 $website_title_sidebar = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'")

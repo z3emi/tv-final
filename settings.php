@@ -3,7 +3,7 @@ require_once 'config.php';
 include 'auth_check.php'; // Includes session_start()
 require_admin(); // Only admins can access this page
 
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

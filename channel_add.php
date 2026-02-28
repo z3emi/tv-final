@@ -3,7 +3,7 @@ require_once 'config.php';
 session_start();
 if (!isset($_SESSION['user'])) { header('Location: login.php'); exit(); }
 
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'")
                          ->fetch_assoc()['setting_value'] ?? 'Admin Panel';
 
