@@ -40,13 +40,11 @@ curl_setopt_array($ch, [
   CURLOPT_SSL_VERIFYHOST => false,
   CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT'] ?? 'Mozilla/5.0',
   CURLOPT_HTTPHEADER => [
-    'Referer: ' . $originBase . '/',
-    'Origin: ' . $originBase,
     'Accept: */*',
     'Accept-Language: ar,en;q=0.9',
-    'Accept-Encoding: identity', // لا ضغط
     'Connection: keep-alive',
   ],
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CONNECTTIMEOUT => 10,
   CURLOPT_TIMEOUT => 20,
 ]);
@@ -61,10 +59,11 @@ http_response_code($code);
 header('Access-Control-Allow-Origin: *');
 
 // كشف إن كان HLS حتى لو الامتداد/MIME مو قياسي
+$probe = ltrim($body, "\xEF\xBB\xBF\x00\x09\x0A\x0D\x20");
 $isHls = (stripos($ctype,'application/vnd.apple.mpegurl') !== false)
       || (stripos($ctype,'application/x-mpegurl') !== false)
       || (preg_match('/\.m3u8(\?|$)/i', $target))
-      || (strncmp($body, "#EXTM3U", 7) === 0)
+      || (strncmp($probe, "#EXTM3U", 7) === 0)
       || (strpos($body, "#EXT-X-STREAM-INF") !== false);
 
 if ($isHls) {
