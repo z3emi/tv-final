@@ -3,7 +3,7 @@
 require_once 'config.php';
 
 // 2. المسار الجديد والمطلق لملف الحالة على قرص الرام
-$status_file_path = 'R:/live/status.json';
+$status_file_path = LIVE_ROOT . '/status.json';
 
 // 3. تعيين رأس المحتوى ليكون JSON
 header('Content-Type: application/json; charset=utf-8');
@@ -51,6 +51,10 @@ if (isset($data['channels']) && is_array($data['channels'])) {
             $channel['name'] = 'قناة غير معروفة';
             $channel['image_url'] = 'default.png';
         }
+
+        $links = build_local_stream_links((string)$channel_id);
+        $channel['stream_link'] = $links['stream_link'];
+        $channel['audio_link'] = $links['audio_link'];
     }
 }
 

@@ -13,11 +13,35 @@ $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
 // تحقق من وجود أخطاء في الاتصال
 if ($mysqli->connect_error) {
-    // استخدم die هنا لأن هذا خطأ فادح يمنع عمل أي شيء آخر
     die("❌ فشل الاتصال بقاعدة البيانات: " . $mysqli->connect_error);
 }
 
-// اضبط الترميز والمنطقة الزمنية لدعم اللغة العربية وشروط الوقت
 $mysqli->set_charset("utf8mb4");
 $mysqli->query("SET time_zone = '+03:00'");
+
+if (!defined('APP_BASE_DIR')) {
+    define('APP_BASE_DIR', __DIR__);
+}
+if (!defined('LIVE_ROOT')) {
+    $liveRoot = getenv('TV_LIVE_ROOT') ?: APP_BASE_DIR . '/live';
+    define('LIVE_ROOT', rtrim($liveRoot, '/\\'));
+}
+if (!defined('COMMANDS_DIR')) {
+    define('COMMANDS_DIR', LIVE_ROOT . '/commands');
+}
+if (!defined('CHANNELS_FILE_PATH')) {
+    define('CHANNELS_FILE_PATH', APP_BASE_DIR . '/channels.txt');
+}
+
+function build_local_stream_links(string $channelId): array {
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $safeId = rawurlencode($channelId);
+    $base = "{$scheme}://{$host}/live/channel_{$safeId}";
+
+    return [
+        'stream_link' => $base . '/stream.m3u8',
+        'audio_link' => $base . '/audio.m3u8',
+    ];
+}
 ?>
