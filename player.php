@@ -17,7 +17,7 @@ $audio_url = '';
 $poster_url = '';
 
 if (isset($mysqli)) {
-    $stmt = $mysqli->prepare("SELECT name, source_url, is_direct, image_url FROM channels WHERE id = ? LIMIT 1");
+    $stmt = $mysqli->prepare("SELECT name, url, is_direct, image_url FROM channels WHERE id = ? LIMIT 1");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -25,8 +25,8 @@ if (isset($mysqli)) {
     if ($row = $result->fetch_assoc()) {
         $name = (string)($row['name'] ?? '');
 
-        if (!empty($row['is_direct']) && (int)$row['is_direct'] === 1 && !empty($row['source_url'])) {
-            $url = trim((string)$row['source_url']);
+        if (!empty($row['is_direct']) && (int)$row['is_direct'] === 1 && !empty($row['url'])) {
+            $url = trim((string)$row['url']);
         } else {
             $links = build_local_stream_links((string)$id);
             $url = $links['stream_link'];

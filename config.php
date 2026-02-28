@@ -1,10 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 // ابدأ الجلسة في مكان واحد مركزي
 session_start();
 
 // بيانات الاتصال بقاعدة البيانات
 $db_host = "localhost";
-$db_user = "tv_admin";
+$db_user = 'tv_admin';
 $db_pass = "TvPassword2026!";
 $db_name = "tv_db";
 

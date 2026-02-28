@@ -12,7 +12,7 @@ $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // استلام البيانات من الفورم المعدل
     $name = $_POST['name'] ?? '';
-    $source_url = $_POST['url'] ?? ''; // رابط البث أصبح الآن هو رابط المصدر
+    $url = $_POST['url'] ?? ''; // رابط البث أصبح الآن هو رابط المصدر
     $category_id = $_POST['category_id'] ?? 0;
     $is_direct = $_POST['is_direct'] ?? 0; // الحقل الجديد
     $is_active = $_POST['active'] ?? 1;
@@ -36,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($message)) {
         // تم تحديث استعلام SQL ليشمل الحقول الجديدة
-        // تم تغيير اسم العمود من stream_url إلى source_url ليتوافق مع قاعدة البيانات
-        $stmt = $mysqli->prepare("INSERT INTO channels (name, source_url, image_url, category_id, is_active, is_direct) VALUES (?, ?, ?, ?, ?, ?)");
+        // تم تغيير اسم العمود من url إلى url ليتوافق مع قاعدة البيانات
+        $stmt = $mysqli->prepare("INSERT INTO channels (name, url, image_url, category_id, is_active, is_direct) VALUES (?, ?, ?, ?, ?, ?)");
         // تم تحديث أنواع المتغيرات
-        $stmt->bind_param("sssiii", $name, $source_url, $image_path, $category_id, $is_active, $is_direct);
+        $stmt->bind_param("sssiii", $name, $url, $image_path, $category_id, $is_active, $is_direct);
 
         if ($stmt->execute()) {
             // --- تم حذف كود تشغيل FFmpeg من هنا ---

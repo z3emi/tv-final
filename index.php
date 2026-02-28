@@ -29,9 +29,9 @@ if ($server_ip === '::1' || $server_ip === '127.0.0.1' || $server_ip === '') {
     $server_ip = gethostbyname(gethostname());
 }
 
-function build_stream_url(array $c): string {
-    if (!empty($c['is_direct']) && (int)$c['is_direct'] === 1 && !empty($c['source_url'])) {
-        return $c['source_url'];
+function build_url(array $c): string {
+    if (!empty($c['is_direct']) && (int)$c['is_direct'] === 1 && !empty($c['url'])) {
+        return $c['url'];
     } else {
         $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
         $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
@@ -127,7 +127,7 @@ function build_stream_url(array $c): string {
     <div class="channel-grid">
         <?php while($c = $channels_result->fetch_assoc()): ?>
             <?php
-                $stream_url = build_stream_url($c);
+                $url = build_url($c);
                 $img = $c['image_url']
                     ? 'stream/stream/uploads/' . str_replace('\\', '/', $c['image_url'])
                     : 'https://via.placeholder.com/120x80/2a2a2a/6c757d?text=No+Logo';
@@ -135,7 +135,7 @@ function build_stream_url(array $c): string {
             <div class="channel-card open-player"
                  data-id="<?= (int)$c['id'] ?>"
                  data-name="<?= htmlspecialchars($c['name']) ?>"
-                 data-url="<?= htmlspecialchars($stream_url) ?>"
+                 data-url="<?= htmlspecialchars($url) ?>"
                  data-category="<?= htmlspecialchars($c['category_name']) ?>">
                 <div class="live-indicator">LIVE</div>
                 <div class="channel-logo-container">

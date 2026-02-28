@@ -37,14 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($message)) {
         $name = $_POST['name'];
-        $source_url = $_POST['source_url'];
+        $url = $_POST['url'];
         $category_id = $_POST['category_id'];
         $is_active = isset($_POST['is_active']) ? 1 : 0;
         $is_direct = isset($_POST['is_direct']) ? (int) $_POST['is_direct'] : 0;
         $channel_id = $_POST['id'];
 
-        $stmt = $mysqli->prepare("UPDATE channels SET name=?, source_url=?, image_url=?, category_id=?, is_active=?, is_direct=? WHERE id=?");
-        $stmt->bind_param("sssiiii", $name, $source_url, $image_path, $category_id, $is_active, $is_direct, $channel_id);
+        $stmt = $mysqli->prepare("UPDATE channels SET name=?, url=?, image_url=?, category_id=?, is_active=?, is_direct=? WHERE id=?");
+        $stmt->bind_param("sssiiii", $name, $url, $image_path, $category_id, $is_active, $is_direct, $channel_id);
         
         if ($stmt->execute()) {
             $_SESSION['message'] = "<div class='alert alert-success'>تم تحديث القناة بنجاح.</div>";
@@ -141,8 +141,8 @@ $categories_result = $mysqli->query("SELECT * FROM categories ORDER BY name ASC"
                                 <input id="name" name="name" class="form-control" value="<?= htmlspecialchars($channel['name']) ?>" required>
                             </div>
                             <div class="mb-3">
-                                <label for="source_url" class="form-label">رابط المصدر (Source URL):</label>
-                                <textarea id="source_url" name="source_url" class="form-control" rows="4" required><?= htmlspecialchars($channel['source_url']) ?></textarea>
+                                <label for="url" class="form-label">رابط المصدر (Source URL):</label>
+                                <textarea id="url" name="url" class="form-control" rows="4" required><?= htmlspecialchars($channel['url']) ?></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="category_id" class="form-label">التصنيف:</label>

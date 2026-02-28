@@ -27,7 +27,7 @@ if ($mysqli->connect_errno) {
 }
 
 // Prepare and execute the query
-$stmt = $mysqli->prepare("SELECT stream_url FROM channels WHERE id = ?");
+$stmt = $mysqli->prepare("SELECT url FROM channels WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -35,7 +35,7 @@ $result = $stmt->get_result();
 if ($channel = $result->fetch_assoc()) {
     // Write the new stream URL to the config file
     // The background process will read this file.
-    file_put_contents('stream_url.txt', $channel['stream_url']);
+    file_put_contents('url.txt', $channel['url']);
 
     // Send a success response
     http_response_code(200); // OK

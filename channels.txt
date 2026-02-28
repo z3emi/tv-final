@@ -1,4 +1,2 @@
-14|http://45.67.56.78/Sport2/tracks-v1/index.fmp4.m3u8||http://45.67.56.78/Sport2/tracks-a1/index.fmp4.m3u8
-16|http://45.67.56.78/Sport1/tracks-v1/index.fmp4.m3u8||http://45.67.56.78/Sport1/tracks-a1/index.fmp4.m3u8
-40|http://45.67.56.78/Sport3/tracks-v1/index.fmp4.m3u8||http://45.67.56.78/Sport3/tracks-a1/index.fmp4.m3u8
-39|http://hookpro.site:80/mo3@urute/10669887497448/440502
+2|http://45.67.56.78/Sport2/tracks-v1/index.fmp4.m3u8||http://45.67.56.78/Sport2/tracks-a1/index.fmp4.m3u8
+3|http://45.67.56.78/Sport2/tracks-v1/index.fmp4.m3u8||http://45.67.56.78/Sport2/tracks-a1/index.fmp4.m3u8

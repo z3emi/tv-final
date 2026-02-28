@@ -1,14 +1,12 @@
 <?php
 $website_title = 'Stream System';
 
-<<<<<<< HEAD
 $mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 if ($mysqli->connect_error) { http_response_code(500); echo "Database connection failed."; exit; }
 
 // نفس طريقة الرئيسية لسحب العنوان
 $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'")
     ->fetch_assoc()['setting_value'] ?? 'Stream System';
-=======
 mysqli_report(MYSQLI_REPORT_OFF);
 $mysqli = @new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 if (!$mysqli->connect_errno) {
@@ -18,7 +16,6 @@ if (!$mysqli->connect_errno) {
     }
     $mysqli->close();
 }
->>>>>>> 77d5effecafcb8d1738a653072c13bcced3940a8
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
