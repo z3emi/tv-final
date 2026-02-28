@@ -4,11 +4,12 @@
 //   proxy.php?url=https://yariga7.online/upload/images/logo1.zip
 //   proxy.php?u=BASE64URL(...)
 
-$ALLOWED_HOSTS = ['yariga7.online']; // زيد إذا تحتاج
-
-function b64u_dec($s){ return base64_decode(strtr($s,'-_','+/')); }
-function b64u_enc($s){ return rtrim(strtr(base64_encode($s),'+/','-_'),'='); }
-
+function b64u_dec($s){
+  $s = strtr((string)$s, '-_', '+/');
+  $pad = strlen($s) % 4;
+  if ($pad) $s .= str_repeat('=', 4 - $pad);
+  return base64_decode($s);
+}
 $raw = $_GET['url'] ?? null;
 $u   = $_GET['u']   ?? null;
 
@@ -24,21 +25,23 @@ if (!preg_match('#^https?://#i', $target)) { http_response_code(400); exit('Bad 
 
 $parts = parse_url($target);
 $host  = $parts['host'] ?? '';
-if (!$host || !in_array($host, $ALLOWED_HOSTS, true)) {
-  http_response_code(403); exit('Host not allowed');
+if (!$host) {
+  http_response_code(400); exit('Bad host');
 }
+
+$originBase = ($parts['scheme'] ?? 'http') . '://' . $host;
 
 $ch = curl_init($target);
 curl_setopt_array($ch, [
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_HEADER => true,
+  CURLOPT_HEADER => false,
   CURLOPT_SSL_VERIFYPEER => false,
   CURLOPT_SSL_VERIFYHOST => false,
   CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT'] ?? 'Mozilla/5.0',
   CURLOPT_HTTPHEADER => [
-    'Referer: https://yarigatv.basnews.com/',
-    'Origin: https://yarigatv.basnews.com',
+    'Referer: ' . $originBase . '/',
+    'Origin: ' . $originBase,
     'Accept: */*',
     'Accept-Language: ar,en;q=0.9',
     'Accept-Encoding: identity', // لا ضغط
@@ -49,8 +52,7 @@ curl_setopt_array($ch, [
 ]);
 $res = curl_exec($ch);
 if ($res === false) { http_response_code(502); exit('Upstream error'); }
-$hSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-$body  = substr($res, $hSize);
+$body  = $res;
 $code  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $ctype = curl_getinfo($ch, CURLINFO_CONTENT_TYPE) ?: '';
 curl_close($ch);
