@@ -1,0 +1,196 @@
+/*
+ * Stream Panel - Modern Custom Stylesheet
+ * 2025-08-06
+ */
+
+/* 1. Global Imports & Variables
+/* ----------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+:root {
+    --bs-primary: #0d6efd;
+    --bs-primary-rgb: 13, 110, 253;
+    --bs-body-bg: #f8f9fa;
+    --bs-body-font-family: 'Cairo', sans-serif;
+    --bs-body-color: #343a40;
+    --card-bg: #ffffff;
+    --card-border-color: #e9ecef;
+    --sidebar-bg: #212529;
+    --sidebar-color: #ced4da;
+    --sidebar-hover-bg: #343a40;
+    --sidebar-active-bg: var(--bs-primary);
+    --sidebar-header-bg: #1a1d20;
+}
+
+/* 2. General & Layout
+/* ----------------------------------------------- */
+body {
+    background-color: var(--bs-body-bg);
+    font-family: var(--bs-body-font-family);
+    color: var(--bs-body-color);
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#content {
+    width: 100%;
+    padding: 2rem;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* 3. Sidebar
+/* ----------------------------------------------- */
+#sidebar {
+    min-width: 260px;
+    max-width: 260px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-color);
+    transition: all 0.3s;
+    box-shadow: 0.1rem 0 0.5rem rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: var(--sidebar-header-bg);
+    text-align: center;
+}
+
+#sidebar .sidebar-header h3 {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+}
+
+#sidebar ul.components {
+    padding: 15px 0;
+    flex-grow: 1;
+}
+
+#sidebar ul li a {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--sidebar-color);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border-right: 4px solid transparent;
+}
+
+#sidebar ul li a:hover {
+    color: #fff;
+    background: var(--sidebar-hover-bg);
+    border-right-color: var(--bs-primary);
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: var(--bs-primary);
+}
+
+#sidebar .bi {
+    font-size: 1.2rem;
+}
+
+/* 4. Reusable Components (Cards, Tables, Forms)
+/* ----------------------------------------------- */
+.card {
+    border: none;
+    border-radius: .75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--card-border-color);
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    --bs-table-border-color: var(--card-border-color);
+}
+
+.table thead th {
+    font-weight: 600;
+    background-color: #f1f3f5;
+}
+
+.table>tbody>tr:last-child>* {
+    border-bottom-width: 0;
+}
+
+.table-hover>tbody>tr:hover>* {
+    --bs-table-accent-bg: rgba(var(--bs-primary-rgb), 0.06);
+}
+
+.form-control, .form-select {
+    border-radius: .5rem;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #fff;
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.2);
+}
+
+.btn {
+    border-radius: .5rem;
+    padding: .6rem 1.2rem;
+    font-weight: 600;
+}
+
+/* 5. Page Specific
+/* ----------------------------------------------- */
+
+/* Dashboard */
+.stat-card a {
+    text-decoration: none;
+}
+.stat-card .icon {
+    font-size: 2.5rem;
+}
+.stat-card .stat-badge {
+    font-size: 1rem;
+    padding: .5em .8em;
+}
+.nav-card {
+    border: 1px solid var(--card-border-color);
+    border-radius: .75rem;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.08);
+}
+
+/* Login Page */
+.login-page {
+    background: #eef2f7;
+}
+
+.login-card {
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 450px;
+    background-color: #ffffff;
+}

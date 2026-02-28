@@ -1,0 +1,38 @@
+#
+# Apache Server Configs
+#
+
+# --- 1. تفعيل محرك إعادة الكتابة ---
+RewriteEngine On
+
+# --- 2. تحديد القاعدة الأساسية للمسار ---
+# إذا كان موقعك في مجلد فرعي، قم بتغيير / إلى /yourfolder/
+RewriteBase /
+
+# --- 3. تحديد الملفات الافتراضية ---
+DirectoryIndex index.php index.html
+
+# --- 4. القاعدة الأساسية لتحويل كل الطلبات إلى index.php (مثل try_files في Nginx) ---
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+# --- 5. إعدادات الأمان الأساسية ---
+<Files ".ht*">
+    Require all denied
+</Files>
+<FilesMatch "\.(ini|log|conf)$">
+    Require all denied
+</FilesMatch>
+
+# --- 6. إعدادات Headers للأمان ---
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
+
+# --- 7. إعدادات الضغط Gzip ---
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+</IfModule>
