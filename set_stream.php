@@ -6,7 +6,7 @@ $id = $_POST['id'] ?? 0;
 $response = ['success' => false];
 
 if ($id > 0) {
-    $mysqli = new mysqli("localhost", "root", "", "stream_db");
+    $mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
     $stmt = $mysqli->prepare("SELECT stream_url FROM channels WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
