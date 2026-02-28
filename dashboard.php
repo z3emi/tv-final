@@ -1,5 +1,28 @@
 <?php
-// ... (بداية الملف كما هي) ...
+require_once 'config.php';
+include 'auth_check.php';
+require_admin();
+
+$website_title = 'Stream System';
+$res = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title' LIMIT 1");
+if ($res && $row = $res->fetch_assoc()) {
+    $website_title = $row['setting_value'] ?: $website_title;
+}
+
+$total_channels = 0;
+$active_channels = 0;
+$total_viewers = 0;
+
+$statsRes = $mysqli->query("SELECT COUNT(*) AS total_channels, SUM(is_active = 1) AS active_channels FROM channels");
+if ($statsRes && $stats = $statsRes->fetch_assoc()) {
+    $total_channels = (int)($stats['total_channels'] ?? 0);
+    $active_channels = (int)($stats['active_channels'] ?? 0);
+}
+
+$viewersRes = $mysqli->query("SELECT COUNT(*) AS total_viewers FROM viewers WHERE last_active > NOW() - INTERVAL 20 SECOND");
+if ($viewersRes && $vw = $viewersRes->fetch_assoc()) {
+    $total_viewers = (int)($vw['total_viewers'] ?? 0);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -30,7 +53,34 @@
         </div>
 
         <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 nav-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-broadcast fs-1 text-primary"></i>
+                        <h6 class="text-muted mt-2 mb-1">إجمالي القنوات</h6>
+                        <h3 class="mb-0"><?= number_format($total_channels) ?></h3>
+                    </div>
+                </div>
             </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 nav-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-play-circle fs-1 text-success"></i>
+                        <h6 class="text-muted mt-2 mb-1">القنوات المفعّلة</h6>
+                        <h3 class="mb-0"><?= number_format($active_channels) ?></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 nav-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people fs-1 text-warning"></i>
+                        <h6 class="text-muted mt-2 mb-1">المشاهدون الآن</h6>
+                        <h3 class="mb-0" id="live-viewers-count"><?= number_format($total_viewers) ?></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="card shadow-sm border-0">
             <div class="card-header d-flex justify-content-between align-items-center bg-light border-0 py-3">
@@ -115,6 +165,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const updateTime = new Date(data.last_update).toLocaleTimeString('ar-EG');
             lastUpdateTimeElem.innerHTML = `<i class="bi bi-clock-history"></i> آخر تحديث: ${updateTime}`;
             statusTableBody.innerHTML = '';
+            const runningCount = (data.channels || []).filter(c => c.status_code === 'running').length;
+            document.getElementById('live-viewers-count').textContent = new Intl.NumberFormat('ar-EG').format(runningCount);
 
             if (data.channels && data.channels.length > 0) {
                 data.channels.forEach(channel => {
