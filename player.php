@@ -3,37 +3,72 @@
 require_once 'config.php'; // يستخدم ملف الاتصال المركزي
 
 // ---- Params ----
-$id   = isset($_GET['id'])   ? (int)$_GET['id'] : 0;
-$name = isset($_GET['name']) ? trim($_GET['name']) : '';
-$url  = isset($_GET['url'])  ? trim($_GET['url']) : '';
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-if ($id <= 0 || $name === '' || $url === '') {
+if ($id <= 0) {
     http_response_code(400);
-    echo 'Missing or invalid parameters.';
+    echo 'Missing or invalid channel id.';
+    exit;
+}
+
+$name = '';
+$url = '';
+$audio_url = '';
+$poster_url = '';
+
+if (isset($mysqli)) {
+    $stmt = $mysqli->prepare("SELECT name, source_url, is_direct, image_url FROM channels WHERE id = ? LIMIT 1");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        $name = (string)($row['name'] ?? '');
+
+        if (!empty($row['is_direct']) && (int)$row['is_direct'] === 1 && !empty($row['source_url'])) {
+            $url = trim((string)$row['source_url']);
+        } else {
+            $links = build_local_stream_links((string)$id);
+            $url = $links['stream_link'];
+            $audio_url = $links['audio_link'];
+        }
+
+        if (!empty($row['image_url'])) {
+            $safeImage = rawurlencode(basename((string)$row['image_url']));
+            $poster_url = 'stream/stream/uploads/' . $safeImage;
+        }
+    }
+
+    $stmt->close();
+}
+
+if ($name === '' && isset($_GET['name'])) {
+    $name = trim((string)$_GET['name']);
+}
+
+if ($url === '' && isset($_GET['url'])) {
+    $url = trim((string)$_GET['url']);
+}
+
+if ($name === '' || $url === '') {
+    http_response_code(404);
+    echo 'Channel not found or stream URL unavailable.';
     exit;
 }
 
 // تأكيد URL مطلق
 if (!preg_match('~^https?://~i', $url)) {
     $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-    $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
-    $path   = ltrim($url, '/');
-    $url    = "$scheme://$host/$path";
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $path = ltrim($url, '/');
+    $url = "$scheme://$host/$path";
 }
 
-// --- جلب صورة القناة لاستخدامها كـ Poster ---
-$poster_url = '';
-if (isset($mysqli)) {
-    $stmt = $mysqli->prepare("SELECT image_url FROM channels WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        if(!empty($row['image_url'])) {
-            $poster_url = 'stream/stream/uploads/' . htmlspecialchars($row['image_url']);
-        }
-    }
-    $stmt->close();
+if ($audio_url !== '' && !preg_match('~^https?://~i', $audio_url)) {
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $path = ltrim($audio_url, '/');
+    $audio_url = "$scheme://$host/$path";
 }
 
 $website_title = 'Player';
@@ -250,7 +285,8 @@ if (isset($mysqli)) {
       playsinline webkit-playsinline x5-playsinline
       x-webkit-airplay="allow"
       autoplay="false"
-      crossorigin="anonymous"></video>
+      crossorigin="anonymous"
+      poster="<?= htmlspecialchars($poster_url) ?>"></video>
   </div>
 </div>
 
@@ -280,6 +316,8 @@ document.addEventListener('visibilitychange', () => {
     const CHANNEL_ID   = <?= (int)$id ?>;
     const CHANNEL_NAME = <?= json_encode($name, JSON_UNESCAPED_UNICODE) ?>;
     const STREAM_URL   = <?= json_encode($url) ?>;
+    const AUDIO_URL    = <?= json_encode($audio_url) ?>;
+    let audioFallbackTried = false;
 
     function getViewerId() { 
         let viewerId = localStorage.getItem('viewer_uid'); 
@@ -878,6 +916,19 @@ document.addEventListener('visibilitychange', () => {
 
     player.on('error', (e) => {
         console.log('Player error:', e, player.error());
+
+        if (!audioFallbackTried && AUDIO_URL && STREAM_URL !== AUDIO_URL) {
+            audioFallbackTried = true;
+            console.log('Trying audio-only fallback stream...');
+            showOverlay(true, true);
+            player.error(null);
+            player.src({ src: AUDIO_URL, type: 'application/x-mpegURL' });
+            player.play().catch(() => {
+                NetworkWatchdog.onError();
+            });
+            return;
+        }
+
         showOverlay(true, true);
         NetworkWatchdog.onError();
     });
@@ -915,6 +966,9 @@ document.addEventListener('visibilitychange', () => {
         if (wakeLock) {
             wakeLock.release();
         }
+        if (iosMasterWatchdogInterval) {
+            clearInterval(iosMasterWatchdogInterval);
+        }
         try {
             player.pause();
             player.reset();
@@ -945,8 +999,9 @@ document.addEventListener('visibilitychange', () => {
     });
 
     // مراقب إضافي للـ iOS للتأكد من استمرارية التشغيل
+    let iosMasterWatchdogInterval = null;
     if (isIOS) {
-        setInterval(() => {
+        iosMasterWatchdogInterval = setInterval(() => {
             if (!player.paused()) {
                 const noProgressMs = Date.now() - NetworkWatchdog.lastTimeUpdate;
                 const readyState = player.readyState();
