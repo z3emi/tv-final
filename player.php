@@ -83,7 +83,7 @@ function maybe_proxy_insecure_stream(string $streamUrl): string {
         return $streamUrl;
     }
 
-    return 'proxy.php?u=' . rtrim(strtr(base64_encode($streamUrl), '+/', '-_'), '=');
+    return 'proxy.php?url=' . rawurlencode($streamUrl);
 }
 
 $url = maybe_proxy_insecure_stream($url);
