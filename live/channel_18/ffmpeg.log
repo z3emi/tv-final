@@ -1,474 +1,0 @@
-[hls @ 000002740c1b65c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/55/46-05000.ts' for reading
-[hls @ 000002740c1b65c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/55/51-05000.ts' for reading
-Input #0, hls, from 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8':
-  Duration: N/A, start: 32734.567689, bitrate: N/A
-  Program 0 
-    Metadata:
-      variant_bitrate : 0
-  Stream #0:0: Video: h264 (Main) ([27][0][0][0] / 0x001B), yuv420p, 1280x720 [SAR 1:1 DAR 16:9], 50 fps, 50 tbr, 90k tbn, start 32734.567689
-    Metadata:
-      variant_bitrate : 0
-  Stream #0:1: Audio: aac (LC) ([15][0][0][0] / 0x000F), 48000 Hz, stereo, fltp, start 32734.576633
-    Metadata:
-      variant_bitrate : 0
-Stream mapping:
-  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
-  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
-[libx264 @ 000002740c971300] using SAR=1/1
-[libx264 @ 000002740c971300] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX
-[libx264 @ 000002740c971300] profile High, level 3.2, 4:2:0, 8-bit
-[libx264 @ 000002740c971300] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=22 lookahead_threads=5 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 vbv_maxrate=3000 vbv_bufsize=6000 crf_max=0.0 nal_hrd=none filler=0 ip_ratio=1.40 aq=1:1.00
-Output #0, hls, to 'live\channel_18\stream.m3u8':
-  Metadata:
-    encoder         : Lavf62.1.103
-  Stream #0:0: Video: h264, yuv420p(tv, progressive), 1280x720 [SAR 1:1 DAR 16:9], q=2-31, 50 fps, 90k tbn
-    Metadata:
-      encoder         : Lavc62.8.100 libx264
-      variant_bitrate : 0
-    Side data:
-      cpb: bitrate max/min/avg: 3000000/0/0 buffer size: 6000000 vbv_delay: N/A
-  Stream #0:1: Audio: aac (LC), 44100 Hz, stereo, fltp, 128 kb/s
-    Metadata:
-      encoder         : Lavc62.8.100 aac
-      variant_bitrate : 0
-frame=    0 fps=0.0 q=0.0 size=N/A time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.50    frame=    0 fps=0.0 q=0.0 size=N/A time=N/A bitrate=N/A speed=N/A elapsed=0:00:01.04    frame=   25 fps= 16 q=31.0 size=N/A time=00:00:00.46 bitrate=N/A speed=0.296x elapsed=0:00:01.55    frame=   52 fps= 25 q=31.0 size=N/A time=00:00:01.00 bitrate=N/A speed=0.483x elapsed=0:00:02.07    frame=   73 fps= 28 q=31.0 size=N/A time=00:00:01.42 bitrate=N/A speed=0.549x elapsed=0:00:02.58    frame=   95 fps= 31 q=31.0 size=N/A time=00:00:01.86 bitrate=N/A speed= 0.6x elapsed=0:00:03.10    frame=  118 fps= 32 q=31.0 size=N/A time=00:00:02.32 bitrate=N/A speed=0.638x elapsed=0:00:03.63    frame=  141 fps= 34 q=31.0 size=N/A time=00:00:02.78 bitrate=N/A speed=0.669x elapsed=0:00:04.15    frame=  161 fps= 34 q=31.0 size=N/A time=00:00:03.18 bitrate=N/A speed=0.679x elapsed=0:00:04.68    frame=  185 fps= 36 q=31.0 size=N/A time=00:00:03.66 bitrate=N/A speed=0.704x elapsed=0:00:05.19    frame=  198 fps= 34 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.678x elapsed=0:00:05.78    frame=  198 fps= 31 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.623x elapsed=0:00:06.28    frame=  198 fps= 29 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.576x elapsed=0:00:06.80    frame=  198 fps= 27 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.536x elapsed=0:00:07.31    frame=  198 fps= 25 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed= 0.5x elapsed=0:00:07.83    frame=  198 fps= 24 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.469x elapsed=0:00:08.35    frame=  198 fps= 22 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.442x elapsed=0:00:08.86    frame=  198 fps= 21 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.418x elapsed=0:00:09.38    [hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/01-05000.ts' for reading
-frame=  198 fps= 20 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.396x elapsed=0:00:09.89    frame=  198 fps= 19 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.376x elapsed=0:00:10.41    frame=  198 fps= 18 q=31.0 size=N/A time=00:00:03.92 bitrate=N/A speed=0.359x elapsed=0:00:10.92    frame=  204 fps= 18 q=31.0 size=N/A time=00:00:04.04 bitrate=N/A speed=0.352x elapsed=0:00:11.46    frame=  234 fps= 20 q=31.0 size=N/A time=00:00:04.64 bitrate=N/A speed=0.387x elapsed=0:00:11.97    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream0.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame=  263 fps= 21 q=31.0 size=N/A time=00:00:05.22 bitrate=N/A speed=0.418x elapsed=0:00:12.49    frame=  269 fps= 21 q=31.0 size=N/A time=00:00:05.34 bitrate=N/A speed=0.411x elapsed=0:00:13.00    frame=  271 fps= 20 q=31.0 size=N/A time=00:00:05.38 bitrate=N/A speed=0.398x elapsed=0:00:13.52    frame=  275 fps= 20 q=31.0 size=N/A time=00:00:05.46 bitrate=N/A speed=0.388x elapsed=0:00:14.06    frame=  288 fps= 20 q=31.0 size=N/A time=00:00:05.72 bitrate=N/A speed=0.393x elapsed=0:00:14.57    frame=  295 fps= 20 q=31.0 size=N/A time=00:00:05.88 bitrate=N/A speed=0.39x elapsed=0:00:15.08    frame=  314 fps= 20 q=31.0 size=N/A time=00:00:06.24 bitrate=N/A speed= 0.4x elapsed=0:00:15.60    frame=  335 fps= 21 q=31.0 size=N/A time=00:00:06.66 bitrate=N/A speed=0.413x elapsed=0:00:16.11    frame=  369 fps= 22 q=31.0 size=N/A time=00:00:07.34 bitrate=N/A speed=0.441x elapsed=0:00:16.63    frame=  399 fps= 23 q=31.0 size=N/A time=00:00:07.94 bitrate=N/A speed=0.463x elapsed=0:00:17.14    frame=  414 fps= 23 q=31.0 size=N/A time=00:00:08.26 bitrate=N/A speed=0.468x elapsed=0:00:17.66    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-frame=  448 fps= 25 q=31.0 size=N/A time=00:00:08.92 bitrate=N/A speed=0.491x elapsed=0:00:18.17    [hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/11-05000.ts' for reading
-frame=  448 fps= 24 q=31.0 size=N/A time=00:00:08.92 bitrate=N/A speed=0.477x elapsed=0:00:18.70    frame=  473 fps= 25 q=31.0 size=N/A time=00:00:09.42 bitrate=N/A dup=250 drop=0 speed=0.49x elapsed=0:00:19.20    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream1.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame=  523 fps= 27 q=31.0 size=N/A time=00:00:10.42 bitrate=N/A dup=250 drop=0 speed=0.528x elapsed=0:00:19.72    frame=  572 fps= 28 q=31.0 size=N/A time=00:00:11.40 bitrate=N/A dup=250 drop=0 speed=0.563x elapsed=0:00:20.24    frame=  606 fps= 29 q=31.0 size=N/A time=00:00:12.08 bitrate=N/A dup=250 drop=0 speed=0.582x elapsed=0:00:20.75    frame=  632 fps= 30 q=31.0 size=N/A time=00:00:12.62 bitrate=N/A dup=250 drop=0 speed=0.593x elapsed=0:00:21.27    frame=  681 fps= 31 q=31.0 size=N/A time=00:00:13.58 bitrate=N/A dup=250 drop=0 speed=0.623x elapsed=0:00:21.78    frame=  712 fps= 32 q=31.0 size=N/A time=00:00:14.20 bitrate=N/A dup=250 drop=0 speed=0.637x elapsed=0:00:22.30    frame=  740 fps= 32 q=31.0 size=N/A time=00:00:14.76 bitrate=N/A dup=250 drop=0 speed=0.647x elapsed=0:00:22.82    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream2.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame=  784 fps= 34 q=31.0 size=N/A time=00:00:15.64 bitrate=N/A dup=250 drop=0 speed=0.67x elapsed=0:00:23.34    frame=  834 fps= 35 q=31.0 size=N/A time=00:00:16.64 bitrate=N/A dup=250 drop=0 speed=0.698x elapsed=0:00:23.85    frame=  879 fps= 36 q=31.0 size=N/A time=00:00:17.54 bitrate=N/A dup=250 drop=0 speed=0.72x elapsed=0:00:24.36    frame=  909 fps= 37 q=31.0 size=N/A time=00:00:18.14 bitrate=N/A dup=250 drop=0 speed=0.729x elapsed=0:00:24.88    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-frame=  946 fps= 37 q=31.0 size=N/A time=00:00:18.88 bitrate=N/A dup=250 drop=0 speed=0.743x elapsed=0:00:25.39    [https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/16-05000.ts' for reading
-frame=  948 fps= 37 q=31.0 size=N/A time=00:00:18.92 bitrate=N/A dup=250 drop=0 speed=0.73x elapsed=0:00:25.91    frame=  963 fps= 36 q=31.0 size=N/A time=00:00:19.22 bitrate=N/A dup=500 drop=0 speed=0.727x elapsed=0:00:26.43    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream3.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 1000 fps= 37 q=31.0 size=N/A time=00:00:20.02 bitrate=N/A dup=500 drop=0 speed=0.743x elapsed=0:00:26.94    frame= 1050 fps= 38 q=31.0 size=N/A time=00:00:20.96 bitrate=N/A dup=500 drop=0 speed=0.763x elapsed=0:00:27.46    frame= 1140 fps= 41 q=31.0 size=N/A time=00:00:22.76 bitrate=N/A dup=500 drop=0 speed=0.814x elapsed=0:00:27.97    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream4.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 1272 fps= 45 q=31.0 size=N/A time=00:00:25.40 bitrate=N/A dup=500 drop=0 speed=0.892x elapsed=0:00:28.49    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream5.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 1349 fps= 47 q=31.0 size=N/A time=00:00:26.94 bitrate=N/A dup=500 drop=0 speed=0.929x elapsed=0:00:29.00    frame= 1349 fps= 46 q=31.0 size=N/A time=00:00:26.94 bitrate=N/A dup=500 drop=0 speed=0.913x elapsed=0:00:29.52    frame= 1391 fps= 46 q=31.0 size=N/A time=00:00:27.78 bitrate=N/A dup=500 drop=0 speed=0.925x elapsed=0:00:30.03    frame= 1391 fps= 46 q=31.0 size=N/A time=00:00:27.78 bitrate=N/A dup=500 drop=0 speed=0.909x elapsed=0:00:30.55    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-frame= 1429 fps= 46 q=31.0 size=N/A time=00:00:28.54 bitrate=N/A dup=500 drop=0 speed=0.919x elapsed=0:00:31.06    frame= 1448 fps= 46 q=31.0 size=N/A time=00:00:28.92 bitrate=N/A dup=500 drop=0 speed=0.916x elapsed=0:00:31.58    frame= 1448 fps= 45 q=31.0 size=N/A time=00:00:28.92 bitrate=N/A dup=500 drop=0 speed=0.901x elapsed=0:00:32.10    [https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/21-05000.ts' for reading
-frame= 1448 fps= 44 q=31.0 size=N/A time=00:00:28.92 bitrate=N/A dup=500 drop=0 speed=0.887x elapsed=0:00:32.61    frame= 1466 fps= 44 q=31.0 size=N/A time=00:00:29.28 bitrate=N/A dup=500 drop=0 speed=0.884x elapsed=0:00:33.13    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream6.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 1523 fps= 45 q=31.0 size=N/A time=00:00:30.42 bitrate=N/A dup=500 drop=0 speed=0.904x elapsed=0:00:33.64    frame= 1570 fps= 46 q=31.0 size=N/A time=00:00:31.36 bitrate=N/A dup=500 drop=0 speed=0.918x elapsed=0:00:34.16    frame= 1576 fps= 45 q=31.0 size=N/A time=00:00:31.48 bitrate=N/A dup=500 drop=0 speed=0.908x elapsed=0:00:34.68    frame= 1576 fps= 45 q=31.0 size=N/A time=00:00:31.48 bitrate=N/A dup=500 drop=0 speed=0.894x elapsed=0:00:35.19    frame= 1587 fps= 44 q=31.0 size=N/A time=00:00:31.70 bitrate=N/A dup=500 drop=0 speed=0.888x elapsed=0:00:35.71    frame= 1605 fps= 44 q=31.0 size=N/A time=00:00:32.06 bitrate=N/A dup=500 drop=0 speed=0.885x elapsed=0:00:36.22    frame= 1616 fps= 44 q=31.0 size=N/A time=00:00:32.28 bitrate=N/A dup=500 drop=0 speed=0.877x elapsed=0:00:36.81    frame= 1645 fps= 44 q=31.0 size=N/A time=00:00:32.86 bitrate=N/A dup=500 drop=0 speed=0.88x elapsed=0:00:37.33    frame= 1668 fps= 44 q=31.0 size=N/A time=00:00:33.32 bitrate=N/A dup=500 drop=0 speed=0.88x elapsed=0:00:37.85    frame= 1679 fps= 44 q=31.0 size=N/A time=00:00:33.54 bitrate=N/A dup=500 drop=0 speed=0.874x elapsed=0:00:38.36    [https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/26-05000.ts' for reading
-frame= 1698 fps= 44 q=31.0 size=N/A time=00:00:33.92 bitrate=N/A dup=500 drop=0 speed=0.872x elapsed=0:00:38.88    frame= 1698 fps= 43 q=31.0 size=N/A time=00:00:33.92 bitrate=N/A dup=500 drop=0 speed=0.861x elapsed=0:00:39.39    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream7.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 1721 fps= 43 q=31.0 size=N/A time=00:00:34.38 bitrate=N/A dup=500 drop=0 speed=0.861x elapsed=0:00:39.91    frame= 1753 fps= 43 q=31.0 size=N/A time=00:00:35.02 bitrate=N/A dup=500 drop=0 speed=0.866x elapsed=0:00:40.42    frame= 1781 fps= 43 q=31.0 size=N/A time=00:00:35.58 bitrate=N/A dup=500 drop=0 speed=0.869x elapsed=0:00:40.94    frame= 1815 fps= 44 q=31.0 size=N/A time=00:00:36.28 bitrate=N/A dup=500 drop=0 speed=0.875x elapsed=0:00:41.46    frame= 1836 fps= 44 q=31.0 size=N/A time=00:00:36.68 bitrate=N/A dup=500 drop=0 speed=0.874x elapsed=0:00:41.98    frame= 1857 fps= 44 q=31.0 size=N/A time=00:00:37.10 bitrate=N/A dup=500 drop=0 speed=0.873x elapsed=0:00:42.49    frame= 1877 fps= 44 q=31.0 size=N/A time=00:00:37.50 bitrate=N/A dup=500 drop=0 speed=0.872x elapsed=0:00:43.00    frame= 1897 fps= 44 q=31.0 size=N/A time=00:00:37.92 bitrate=N/A dup=500 drop=0 speed=0.871x elapsed=0:00:43.52    frame= 1916 fps= 44 q=31.0 size=N/A time=00:00:38.28 bitrate=N/A dup=500 drop=0 speed=0.869x elapsed=0:00:44.04    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/31-10000.ts' for reading
-frame= 1938 fps= 43 q=31.0 size=N/A time=00:00:38.76 bitrate=N/A dup=500 drop=0 speed=0.87x elapsed=0:00:44.55    frame= 1963 fps= 44 q=31.0 size=N/A time=00:00:39.22 bitrate=N/A dup=500 drop=0 speed=0.87x elapsed=0:00:45.06    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream8.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 1983 fps= 44 q=31.0 size=N/A time=00:00:39.62 bitrate=N/A dup=500 drop=0 speed=0.869x elapsed=0:00:45.58    frame= 2006 fps= 44 q=31.0 size=N/A time=00:00:40.08 bitrate=N/A dup=500 drop=0 speed=0.869x elapsed=0:00:46.10    frame= 2030 fps= 44 q=31.0 size=N/A time=00:00:40.56 bitrate=N/A dup=500 drop=0 speed=0.87x elapsed=0:00:46.61    frame= 2052 fps= 44 q=31.0 size=N/A time=00:00:41.00 bitrate=N/A dup=500 drop=0 speed=0.87x elapsed=0:00:47.13    frame= 2070 fps= 43 q=31.0 size=N/A time=00:00:41.36 bitrate=N/A dup=500 drop=0 speed=0.868x elapsed=0:00:47.64    frame= 2094 fps= 43 q=31.0 size=N/A time=00:00:41.84 bitrate=N/A dup=500 drop=0 speed=0.869x elapsed=0:00:48.16    frame= 2110 fps= 43 q=31.0 size=N/A time=00:00:42.16 bitrate=N/A dup=500 drop=0 speed=0.866x elapsed=0:00:48.67    frame= 2131 fps= 43 q=31.0 size=N/A time=00:00:42.58 bitrate=N/A dup=500 drop=0 speed=0.866x elapsed=0:00:49.19    frame= 2152 fps= 43 q=31.0 size=N/A time=00:00:43.00 bitrate=N/A dup=500 drop=0 speed=0.865x elapsed=0:00:49.72    [https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/41-05001.ts' for reading
-frame= 2174 fps= 43 q=31.0 size=N/A time=00:00:43.44 bitrate=N/A dup=500 drop=0 speed=0.865x elapsed=0:00:50.22    frame= 2190 fps= 43 q=31.0 size=N/A time=00:00:43.76 bitrate=N/A dup=500 drop=0 speed=0.862x elapsed=0:00:50.75    frame= 2199 fps= 43 q=28.0 size=N/A time=00:00:43.94 bitrate=N/A dup=500 drop=0 speed=0.856x elapsed=0:00:51.30    frame= 2215 fps= 43 q=31.0 size=N/A time=00:00:44.26 bitrate=N/A dup=500 drop=0 speed=0.854x elapsed=0:00:51.84    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream9.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 2230 fps= 43 q=31.0 size=N/A time=00:00:44.58 bitrate=N/A dup=500 drop=0 speed=0.852x elapsed=0:00:52.35    frame= 2253 fps= 43 q=31.0 size=N/A time=00:00:45.02 bitrate=N/A dup=500 drop=0 speed=0.852x elapsed=0:00:52.86    frame= 2270 fps= 43 q=31.0 size=N/A time=00:00:45.36 bitrate=N/A dup=500 drop=0 speed=0.849x elapsed=0:00:53.40    frame= 2285 fps= 42 q=31.0 size=N/A time=00:00:45.66 bitrate=N/A dup=500 drop=0 speed=0.846x elapsed=0:00:53.95    frame= 2298 fps= 42 q=31.0 size=N/A time=00:00:45.92 bitrate=N/A dup=500 drop=0 speed=0.842x elapsed=0:00:54.51    frame= 2314 fps= 42 q=31.0 size=N/A time=00:00:46.24 bitrate=N/A dup=500 drop=0 speed=0.84x elapsed=0:00:55.02    frame= 2338 fps= 42 q=31.0 size=N/A time=00:00:46.72 bitrate=N/A dup=500 drop=0 speed=0.841x elapsed=0:00:55.54    frame= 2354 fps= 42 q=31.0 size=N/A time=00:00:47.06 bitrate=N/A dup=500 drop=0 speed=0.84x elapsed=0:00:56.05    frame= 2378 fps= 42 q=31.0 size=N/A time=00:00:47.52 bitrate=N/A dup=500 drop=0 speed=0.838x elapsed=0:00:56.68    frame= 2398 fps= 42 q=31.0 size=N/A time=00:00:47.92 bitrate=N/A dup=500 drop=0 speed=0.838x elapsed=0:00:57.19    frame= 2418 fps= 42 q=31.0 size=N/A time=00:00:48.32 bitrate=N/A dup=500 drop=0 speed=0.837x elapsed=0:00:57.71    frame= 2442 fps= 42 q=31.0 size=N/A time=00:00:48.82 bitrate=N/A dup=500 drop=0 speed=0.838x elapsed=0:00:58.22    frame= 2461 fps= 42 q=31.0 size=N/A time=00:00:49.18 bitrate=N/A dup=500 drop=0 speed=0.837x elapsed=0:00:58.75    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream10.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 2481 fps= 42 q=31.0 size=N/A time=00:00:49.58 bitrate=N/A dup=500 drop=0 speed=0.837x elapsed=0:00:59.25    frame= 2499 fps= 42 q=31.0 size=N/A time=00:00:49.94 bitrate=N/A dup=500 drop=0 speed=0.835x elapsed=0:00:59.77    frame= 2515 fps= 42 q=31.0 size=N/A time=00:00:50.26 bitrate=N/A dup=500 drop=0 speed=0.833x elapsed=0:01:00.34    frame= 2537 fps= 42 q=31.0 size=N/A time=00:00:50.70 bitrate=N/A dup=500 drop=0 speed=0.833x elapsed=0:01:00.87    frame= 2549 fps= 42 q=31.0 size=N/A time=00:00:50.94 bitrate=N/A dup=500 drop=0 speed=0.83x elapsed=0:01:01.38    frame= 2569 fps= 42 q=31.0 size=N/A time=00:00:51.34 bitrate=N/A dup=500 drop=0 speed=0.829x elapsed=0:01:01.89    frame= 2589 fps= 41 q=31.0 size=N/A time=00:00:51.74 bitrate=N/A dup=500 drop=0 speed=0.829x elapsed=0:01:02.42    frame= 2613 fps= 42 q=31.0 size=N/A time=00:00:52.22 bitrate=N/A dup=500 drop=0 speed=0.83x elapsed=0:01:02.93    frame= 2634 fps= 42 q=31.0 size=N/A time=00:00:52.64 bitrate=N/A dup=500 drop=0 speed=0.83x elapsed=0:01:03.44    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream11.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 2651 fps= 41 q=31.0 size=N/A time=00:00:52.98 bitrate=N/A dup=500 drop=0 speed=0.828x elapsed=0:01:03.96    frame= 2668 fps= 41 q=31.0 size=N/A time=00:00:53.32 bitrate=N/A dup=500 drop=0 speed=0.827x elapsed=0:01:04.47    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/56/56-05000.ts' for reading
-frame= 2682 fps= 41 q=31.0 size=N/A time=00:00:53.60 bitrate=N/A dup=500 drop=0 speed=0.825x elapsed=0:01:04.99    frame= 2698 fps= 41 q=31.0 size=N/A time=00:00:53.94 bitrate=N/A dup=500 drop=0 speed=0.823x elapsed=0:01:05.50    frame= 2715 fps= 41 q=31.0 size=N/A time=00:00:54.26 bitrate=N/A dup=500 drop=0 speed=0.822x elapsed=0:01:06.02    frame= 2743 fps= 41 q=31.0 size=N/A time=00:00:54.82 bitrate=N/A dup=500 drop=0 speed=0.824x elapsed=0:01:06.54    frame= 2759 fps= 41 q=31.0 size=N/A time=00:00:55.14 bitrate=N/A dup=500 drop=0 speed=0.822x elapsed=0:01:07.05    frame= 2778 fps= 41 q=31.0 size=N/A time=00:00:55.52 bitrate=N/A dup=500 drop=0 speed=0.822x elapsed=0:01:07.57    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream12.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 2802 fps= 41 q=31.0 size=N/A time=00:00:56.00 bitrate=N/A dup=500 drop=0 speed=0.822x elapsed=0:01:08.08    frame= 2823 fps= 41 q=31.0 size=N/A time=00:00:56.42 bitrate=N/A dup=500 drop=0 speed=0.822x elapsed=0:01:08.65    frame= 2843 fps= 41 q=31.0 size=N/A time=00:00:56.82 bitrate=N/A dup=500 drop=0 speed=0.821x elapsed=0:01:09.17    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream13.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 2864 fps= 41 q=31.0 size=N/A time=00:00:57.24 bitrate=N/A dup=500 drop=0 speed=0.821x elapsed=0:01:09.68    frame= 2883 fps= 41 q=31.0 size=N/A time=00:00:57.62 bitrate=N/A dup=500 drop=0 speed=0.821x elapsed=0:01:10.20    frame= 2900 fps= 41 q=31.0 size=N/A time=00:00:57.96 bitrate=N/A dup=500 drop=0 speed=0.82x elapsed=0:01:10.72    frame= 2918 fps= 41 q=31.0 size=N/A time=00:00:58.32 bitrate=N/A dup=500 drop=0 speed=0.819x elapsed=0:01:11.24    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-frame= 2937 fps= 41 q=31.0 size=N/A time=00:00:58.70 bitrate=N/A dup=500 drop=0 speed=0.818x elapsed=0:01:11.76    [hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/57/06-05000.ts' for reading
-frame= 2948 fps= 41 q=31.0 size=N/A time=00:00:58.92 bitrate=N/A dup=500 drop=0 speed=0.815x elapsed=0:01:12.27    frame= 2948 fps= 40 q=31.0 size=N/A time=00:00:58.92 bitrate=N/A dup=500 drop=0 speed=0.809x elapsed=0:01:12.79    frame= 2948 fps= 40 q=31.0 size=N/A time=00:00:58.92 bitrate=N/A dup=500 drop=0 speed=0.804x elapsed=0:01:13.30    [vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000066, new offset= -10000066
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000066, new offset= 0
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000066, new offset= -10000066
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000067, new offset= 1
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000332
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001266, new offset= 934
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001000, new offset= -10000066
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000999, new offset= 933
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001000, new offset= -10000067
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001000, new offset= 933
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001000, new offset= -10000067
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001000, new offset= 933
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001000, new offset= -10000067
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000999, new offset= 932
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001000, new offset= -10000068
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001000, new offset= 932
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001555, new offset= -10000623
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001555, new offset= 932
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001000, new offset= -10000068
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000999, new offset= 931
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001000, new offset= -10000069
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001544, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001544, new offset= -10000069
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001544, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001544, new offset= -10000069
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001544, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001589, new offset= -10000114
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001589, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001555, new offset= -10000080
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001555, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001555, new offset= -10000080
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001555, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001555, new offset= -10000080
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001555, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001555, new offset= -10000080
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001555, new offset= 1475
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001555, new offset= -10000080
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001421, new offset= 1341
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001422, new offset= -10000081
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001422, new offset= 1341
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001422, new offset= -10000081
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001422, new offset= 1341
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001422, new offset= -10000081
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001421, new offset= 1340
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001422, new offset= -10000082
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001422, new offset= 1340
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001422, new offset= -10000082
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001422, new offset= 1340
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001422, new offset= -10000082
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001421, new offset= 1339
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001422, new offset= -10000083
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001422, new offset= 1339
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000094
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001144, new offset= 1050
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001133, new offset= -10000083
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001133, new offset= 1050
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001133, new offset= -10000083
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001133, new offset= 1050
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001056, new offset= -10000006
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001066, new offset= 1060
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001056, new offset= -9999996
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001055, new offset= 1059
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001056, new offset= -9999997
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001055, new offset= 1058
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001056, new offset= -9999998
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001055, new offset= 1057
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001056, new offset= -9999999
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001055, new offset= 1056
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001056, new offset= -10000000
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001389, new offset= 1389
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001389, new offset= -10000000
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1388
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001389, new offset= -10000001
-frame= 2961 fps= 40 q=31.0 size=N/A time=00:00:59.18 bitrate=N/A dup=500 drop=0 speed=0.802x elapsed=0:01:13.82    [aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1387
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001389, new offset= -10000002
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001389, new offset= 1387
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001389, new offset= -10000002
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1386
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001400, new offset= -10000014
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001399, new offset= 1385
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001400, new offset= -10000015
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001400, new offset= 1385
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001389, new offset= -10000004
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1384
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001389, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001177, new offset= 1172
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001256, new offset= -10000084
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001267, new offset= 1183
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001233, new offset= 1172
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001233, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001233, new offset= 1172
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001222, new offset= -10000050
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001233, new offset= 1183
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001233, new offset= 1172
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001233, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001233, new offset= 1172
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001222, new offset= -10000050
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001233, new offset= 1183
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001233, new offset= -10000050
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1394
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001455, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1383
-frame= 2977 fps= 40 q=31.0 size=N/A time=00:00:59.50 bitrate=N/A dup=500 drop=0 speed= 0.8x elapsed=0:01:14.33    [vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001444, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1383
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001444, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1383
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001444, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1383
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001444, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1383
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001444, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1383
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001444, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001444, new offset= 1383
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001444, new offset= -10000061
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001300, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001244, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001244, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001244, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001244, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001244, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001244, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001244, new offset= 1239
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001244, new offset= -10000005
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1383
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001377, new offset= -9999994
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001378, new offset= 1384
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001388, new offset= -10000004
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1384
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001388, new offset= -10000004
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1384
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001388, new offset= -10000004
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001389, new offset= 1385
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001388, new offset= -10000003
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1385
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001388, new offset= -10000003
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001388, new offset= 1385
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001455, new offset= -10000070
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001455, new offset= 1385
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream14.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 3004 fps= 40 q=31.0 size=N/A time=00:01:00.04 bitrate=N/A dup=500 drop=0 speed=0.802x elapsed=0:01:14.85    [vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000048
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001411, new offset= 1363
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001411, new offset= -10000048
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001410, new offset= 1362
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001411, new offset= -10000049
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001411, new offset= 1362
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001411, new offset= -10000049
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001411, new offset= 1362
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001411, new offset= -10000049
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001410, new offset= 1361
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001400, new offset= -10000039
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001411, new offset= 1372
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001411, new offset= -10000039
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001411, new offset= 1372
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001411, new offset= -10000039
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001410, new offset= 1371
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001411, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-frame= 3026 fps= 40 q=31.0 size=N/A time=00:01:00.48 bitrate=N/A dup=500 drop=0 speed=0.802x elapsed=0:01:15.36    [vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001433, new offset= 1393
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001433, new offset= -10000040
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -9999744, new offset= -296
-frame= 3052 fps= 40 q=31.0 size=N/A time=00:01:01.00 bitrate=N/A dup=1000 drop=0 speed=0.804x elapsed=0:01:15.88    frame= 3096 fps= 41 q=31.0 size=N/A time=00:01:01.88 bitrate=N/A dup=1000 drop=0 speed=0.81x elapsed=0:01:16.39    frame= 3126 fps= 41 q=31.0 size=N/A time=00:01:02.48 bitrate=N/A dup=1000 drop=0 speed=0.812x elapsed=0:01:16.91    frame= 3157 fps= 41 q=31.0 size=N/A time=00:01:03.10 bitrate=N/A dup=1000 drop=0 speed=0.815x elapsed=0:01:17.42    frame= 3186 fps= 41 q=31.0 size=N/A time=00:01:03.68 bitrate=N/A dup=1000 drop=0 speed=0.817x elapsed=0:01:17.94    frame= 3218 fps= 41 q=31.0 size=N/A time=00:01:04.32 bitrate=N/A dup=1000 drop=0 speed=0.82x elapsed=0:01:18.45    frame= 3250 fps= 41 q=31.0 size=N/A time=00:01:04.96 bitrate=N/A dup=1000 drop=0 speed=0.823x elapsed=0:01:18.97    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream15.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 3273 fps= 41 q=31.0 size=N/A time=00:01:05.42 bitrate=N/A dup=1000 drop=0 speed=0.823x elapsed=0:01:19.49    frame= 3300 fps= 41 q=31.0 size=N/A time=00:01:05.96 bitrate=N/A dup=1000 drop=0 speed=0.824x elapsed=0:01:20.00    frame= 3327 fps= 41 q=31.0 size=N/A time=00:01:06.50 bitrate=N/A dup=1000 drop=0 speed=0.826x elapsed=0:01:20.52    frame= 3361 fps= 41 q=31.0 size=N/A time=00:01:07.18 bitrate=N/A dup=1000 drop=0 speed=0.829x elapsed=0:01:21.03    frame= 3392 fps= 42 q=31.0 size=N/A time=00:01:07.80 bitrate=N/A dup=1000 drop=0 speed=0.831x elapsed=0:01:21.55    frame= 3414 fps= 42 q=31.0 size=N/A time=00:01:08.24 bitrate=N/A dup=1000 drop=0 speed=0.831x elapsed=0:01:22.07    frame= 3438 fps= 42 q=31.0 size=N/A time=00:01:08.72 bitrate=N/A dup=1000 drop=0 speed=0.832x elapsed=0:01:22.59    frame= 3462 fps= 42 q=31.0 size=N/A time=00:01:09.20 bitrate=N/A dup=1000 drop=0 speed=0.832x elapsed=0:01:23.12    frame= 3487 fps= 42 q=31.0 size=N/A time=00:01:09.70 bitrate=N/A dup=1000 drop=0 speed=0.833x elapsed=0:01:23.63    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream16.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 3507 fps= 42 q=31.0 size=N/A time=00:01:10.10 bitrate=N/A dup=1000 drop=0 speed=0.833x elapsed=0:01:24.15    frame= 3536 fps= 42 q=31.0 size=N/A time=00:01:10.68 bitrate=N/A dup=1000 drop=0 speed=0.835x elapsed=0:01:24.66    frame= 3572 fps= 42 q=31.0 size=N/A time=00:01:11.40 bitrate=N/A dup=1000 drop=0 speed=0.838x elapsed=0:01:25.17    frame= 3597 fps= 42 q=31.0 size=N/A time=00:01:11.90 bitrate=N/A dup=1000 drop=0 speed=0.839x elapsed=0:01:25.69    frame= 3620 fps= 42 q=31.0 size=N/A time=00:01:12.36 bitrate=N/A dup=1000 drop=0 speed=0.839x elapsed=0:01:26.20    frame= 3647 fps= 42 q=31.0 size=N/A time=00:01:12.90 bitrate=N/A dup=1000 drop=0 speed=0.841x elapsed=0:01:26.72    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/57/21-05000.ts' for reading
-frame= 3673 fps= 42 q=31.0 size=N/A time=00:01:13.42 bitrate=N/A dup=1000 drop=0 speed=0.842x elapsed=0:01:27.24    frame= 3697 fps= 42 q=31.0 size=N/A time=00:01:13.90 bitrate=N/A dup=1000 drop=0 speed=0.842x elapsed=0:01:27.75    frame= 3731 fps= 42 q=31.0 size=N/A time=00:01:14.58 bitrate=N/A dup=1250 drop=0 speed=0.845x elapsed=0:01:28.27    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream17.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 3769 fps= 42 q=31.0 size=N/A time=00:01:15.34 bitrate=N/A dup=1250 drop=0 speed=0.849x elapsed=0:01:28.78    frame= 3802 fps= 43 q=31.0 size=N/A time=00:01:16.00 bitrate=N/A dup=1250 drop=0 speed=0.851x elapsed=0:01:29.30    frame= 3834 fps= 43 q=31.0 size=N/A time=00:01:16.64 bitrate=N/A dup=1250 drop=0 speed=0.853x elapsed=0:01:29.81    frame= 3868 fps= 43 q=31.0 size=N/A time=00:01:17.32 bitrate=N/A dup=1250 drop=0 speed=0.856x elapsed=0:01:30.33    frame= 3898 fps= 43 q=31.0 size=N/A time=00:01:17.92 bitrate=N/A dup=1250 drop=0 speed=0.858x elapsed=0:01:30.85    frame= 3929 fps= 43 q=31.0 size=N/A time=00:01:18.54 bitrate=N/A dup=1250 drop=0 speed=0.86x elapsed=0:01:31.36    frame= 3961 fps= 43 q=31.0 size=N/A time=00:01:19.18 bitrate=N/A dup=1250 drop=0 speed=0.862x elapsed=0:01:31.89    frame= 3985 fps= 43 q=31.0 size=N/A time=00:01:19.66 bitrate=N/A dup=1250 drop=0 speed=0.862x elapsed=0:01:32.40    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream18.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 4009 fps= 43 q=31.0 size=N/A time=00:01:20.14 bitrate=N/A dup=1250 drop=0 speed=0.862x elapsed=0:01:32.91    frame= 4036 fps= 43 q=31.0 size=N/A time=00:01:20.68 bitrate=N/A dup=1250 drop=0 speed=0.864x elapsed=0:01:33.42    frame= 4057 fps= 43 q=31.0 size=N/A time=00:01:21.10 bitrate=N/A dup=1250 drop=0 speed=0.863x elapsed=0:01:33.94    frame= 4085 fps= 43 q=31.0 size=N/A time=00:01:21.66 bitrate=N/A dup=1250 drop=0 speed=0.864x elapsed=0:01:34.46    frame= 4117 fps= 43 q=31.0 size=N/A time=00:01:22.30 bitrate=N/A dup=1250 drop=0 speed=0.866x elapsed=0:01:34.98    frame= 4141 fps= 43 q=31.0 size=N/A time=00:01:22.78 bitrate=N/A dup=1250 drop=0 speed=0.867x elapsed=0:01:35.49    frame= 4165 fps= 43 q=31.0 size=N/A time=00:01:23.26 bitrate=N/A dup=1250 drop=0 speed=0.867x elapsed=0:01:36.05    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/57/31-05000.ts' for reading
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000363
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000067, new offset= -296
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000363
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000066, new offset= -297
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000364
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000066, new offset= -298
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000365
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000067, new offset= -298
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000365
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000066, new offset= -299
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000366
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000066, new offset= -300
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000367
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000067, new offset= -300
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000067, new offset= -10000367
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000522, new offset= 155
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000523, new offset= -10000368
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000521, new offset= 153
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000523, new offset= -10000370
-frame= 4181 fps= 43 q=31.0 size=N/A time=00:01:23.58 bitrate=N/A dup=1250 drop=0 speed=0.865x elapsed=0:01:36.57    [aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000522, new offset= 152
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000382
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000533, new offset= 151
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000523, new offset= -10000372
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000521, new offset= 149
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000511, new offset= -10000362
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000522, new offset= 160
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000523, new offset= -10000363
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000522, new offset= 159
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000523, new offset= -10000364
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000521, new offset= 157
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000523, new offset= -10000366
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000478, new offset= 112
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000478, new offset= -10000366
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000477, new offset= 111
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000478, new offset= -10000367
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000477, new offset= 110
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000478, new offset= -10000368
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000478, new offset= 110
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000478, new offset= -10000368
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000477, new offset= 109
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000489, new offset= -10000380
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000488, new offset= 108
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000478, new offset= -10000370
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000478, new offset= 108
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000489, new offset= -10000381
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000488, new offset= 107
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000478, new offset= -10000371
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000544, new offset= 173
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000383
-frame= 4197 fps= 43 q=31.0 size=N/A time=00:01:23.90 bitrate=N/A dup=1250 drop=0 speed=0.864x elapsed=0:01:37.08    [aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 172
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000362
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000544, new offset= 182
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000374
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 181
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000375
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 180
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000567, new offset= -10000387
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000566, new offset= 179
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000377
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 178
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000567, new offset= -10000389
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000567, new offset= 178
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000378
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000311, new offset= -67
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000311, new offset= -10000378
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000310, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000311, new offset= -10000379
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000311, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000322, new offset= -10000390
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000322, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000311, new offset= -10000379
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000310, new offset= -69
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000322, new offset= -10000391
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000322, new offset= -69
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000322, new offset= -10000391
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000322, new offset= -69
-frame= 4217 fps= 43 q=31.0 size=N/A time=00:01:24.30 bitrate=N/A dup=1250 drop=0 speed=0.864x elapsed=0:01:37.60    [vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000322, new offset= -10000391
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000321, new offset= -70
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000311, new offset= -10000381
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000533, new offset= 152
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000545, new offset= -10000393
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000544, new offset= 151
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000383
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000533, new offset= 150
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000384
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000544, new offset= 160
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000374
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000533, new offset= 159
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000375
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000533, new offset= 158
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000523, new offset= -10000365
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000522, new offset= 157
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000377
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000533, new offset= 156
-frame= 4233 fps= 43 q=31.0 size=N/A time=00:01:24.62 bitrate=N/A dup=1250 drop=0 speed=0.862x elapsed=0:01:38.11    [vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000378
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000288, new offset= -90
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000289, new offset= -10000379
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000289, new offset= -90
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10001367, new offset= -10001457
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10001366, new offset= -91
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000289, new offset= -10000380
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000288, new offset= -92
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000289, new offset= -10000381
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000289, new offset= -92
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000289, new offset= -10000381
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000288, new offset= -93
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000278, new offset= -10000371
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000277, new offset= -94
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000289, new offset= -10000383
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000289, new offset= -94
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000411, new offset= -10000505
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000655, new offset= 150
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000534, new offset= -10000384
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000544, new offset= 160
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000396
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 159
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000397
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 158
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000398
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 157
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000567, new offset= -10000410
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000567, new offset= 157
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000399
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 156
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000400
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000555, new offset= 155
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000556, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000333, new offset= -68
-[vist#0:0/h264 @ 000002740c1b3f80] timestamp discontinuity (stream id=0): 10000333, new offset= -10000401
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream19.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 4248 fps= 43 q=31.0 size=N/A time=00:01:24.92 bitrate=N/A dup=1250 drop=0 speed=0.861x elapsed=0:01:38.68    [aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): -10000577, new offset= 176
-frame= 4262 fps= 43 q=31.0 size=N/A time=00:01:25.20 bitrate=N/A dup=1250 drop=0 speed=0.859x elapsed=0:01:39.19    frame= 4281 fps= 43 q=31.0 size=N/A time=00:01:25.58 bitrate=N/A dup=1250 drop=0 speed=0.858x elapsed=0:01:39.71    [vf#0:0 @ 000002740c7c7dc0] More than 1000 frames duplicated
-frame= 4301 fps= 43 q=31.0 size=N/A time=00:01:26.00 bitrate=N/A dup=1750 drop=0 speed=0.858x elapsed=0:01:40.22    frame= 4331 fps= 43 q=31.0 size=N/A time=00:01:26.62 bitrate=N/A dup=1750 drop=0 speed=0.86x elapsed=0:01:40.75    frame= 4362 fps= 43 q=31.0 size=N/A time=00:01:27.20 bitrate=N/A dup=1750 drop=0 speed=0.861x elapsed=0:01:41.27    frame= 4383 fps= 43 q=31.0 size=N/A time=00:01:27.64 bitrate=N/A dup=1750 drop=0 speed=0.861x elapsed=0:01:41.82    frame= 4410 fps= 43 q=31.0 size=N/A time=00:01:28.16 bitrate=N/A dup=1750 drop=0 speed=0.861x elapsed=0:01:42.36    frame= 4447 fps= 43 q=31.0 size=N/A time=00:01:28.90 bitrate=N/A dup=1750 drop=0 speed=0.864x elapsed=0:01:42.88    frame= 4470 fps= 43 q=31.0 size=N/A time=00:01:29.36 bitrate=N/A dup=1750 drop=0 speed=0.864x elapsed=0:01:43.40    frame= 4495 fps= 43 q=31.0 size=N/A time=00:01:29.86 bitrate=N/A dup=1750 drop=0 speed=0.865x elapsed=0:01:43.91    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream20.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 4539 fps= 43 q=31.0 size=N/A time=00:01:30.74 bitrate=N/A dup=1750 drop=0 speed=0.869x elapsed=0:01:44.43    frame= 4569 fps= 44 q=31.0 size=N/A time=00:01:31.34 bitrate=N/A dup=1750 drop=0 speed=0.87x elapsed=0:01:44.94    frame= 4589 fps= 44 q=31.0 size=N/A time=00:01:31.74 bitrate=N/A dup=1750 drop=0 speed=0.87x elapsed=0:01:45.46    frame= 4616 fps= 44 q=31.0 size=N/A time=00:01:32.28 bitrate=N/A dup=1750 drop=0 speed=0.871x elapsed=0:01:45.97    frame= 4651 fps= 44 q=31.0 size=N/A time=00:01:32.98 bitrate=N/A dup=1750 drop=0 speed=0.873x elapsed=0:01:46.49    frame= 4685 fps= 44 q=31.0 size=N/A time=00:01:33.66 bitrate=N/A dup=1750 drop=0 speed=0.875x elapsed=0:01:47.00    frame= 4718 fps= 44 q=31.0 size=N/A time=00:01:34.32 bitrate=N/A dup=1750 drop=0 speed=0.877x elapsed=0:01:47.52    frame= 4747 fps= 44 q=31.0 size=N/A time=00:01:34.90 bitrate=N/A dup=1750 drop=0 speed=0.878x elapsed=0:01:48.03    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream21.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 4775 fps= 44 q=31.0 size=N/A time=00:01:35.46 bitrate=N/A dup=1750 drop=0 speed=0.879x elapsed=0:01:48.55    frame= 4801 fps= 44 q=31.0 size=N/A time=00:01:36.00 bitrate=N/A dup=1750 drop=0 speed=0.88x elapsed=0:01:49.07    frame= 4816 fps= 44 q=31.0 size=N/A time=00:01:36.28 bitrate=N/A dup=1750 drop=0 speed=0.879x elapsed=0:01:49.58    frame= 4837 fps= 44 q=31.0 size=N/A time=00:01:36.70 bitrate=N/A dup=1750 drop=0 speed=0.878x elapsed=0:01:50.10    frame= 4858 fps= 44 q=31.0 size=N/A time=00:01:37.12 bitrate=N/A dup=1750 drop=0 speed=0.878x elapsed=0:01:50.61    frame= 4881 fps= 44 q=31.0 size=N/A time=00:01:37.58 bitrate=N/A dup=1750 drop=0 speed=0.878x elapsed=0:01:51.13    frame= 4910 fps= 44 q=33.0 size=N/A time=00:01:38.16 bitrate=N/A dup=1750 drop=0 speed=0.879x elapsed=0:01:51.64    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[hls @ 000002740c1b65c0] skipping 2 segments ahead, expired from playlists
-[https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/57/46-05000.ts' for reading
-frame= 4939 fps= 44 q=32.0 size=N/A time=00:01:38.76 bitrate=N/A dup=1750 drop=0 speed=0.88x elapsed=0:01:52.16    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream22.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 4977 fps= 44 q=31.0 size=N/A time=00:01:39.50 bitrate=N/A dup=2000 drop=0 speed=0.883x elapsed=0:01:52.67    frame= 5017 fps= 44 q=31.0 size=N/A time=00:01:40.30 bitrate=N/A dup=2000 drop=0 speed=0.886x elapsed=0:01:53.19    frame= 5047 fps= 44 q=31.0 size=N/A time=00:01:40.90 bitrate=N/A dup=2000 drop=0 speed=0.887x elapsed=0:01:53.71    frame= 5085 fps= 45 q=31.0 size=N/A time=00:01:41.68 bitrate=N/A dup=2000 drop=0 speed=0.89x elapsed=0:01:54.23    frame= 5116 fps= 45 q=31.0 size=N/A time=00:01:42.28 bitrate=N/A dup=2000 drop=0 speed=0.891x elapsed=0:01:54.74    frame= 5152 fps= 45 q=31.0 size=N/A time=00:01:43.00 bitrate=N/A dup=2000 drop=0 speed=0.894x elapsed=0:01:55.26    frame= 5190 fps= 45 q=31.0 size=N/A time=00:01:43.76 bitrate=N/A dup=2000 drop=0 speed=0.896x elapsed=0:01:55.77    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream23.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 5220 fps= 45 q=31.0 size=N/A time=00:01:44.40 bitrate=N/A dup=2000 drop=0 speed=0.898x elapsed=0:01:56.28    frame= 5237 fps= 45 q=31.0 size=N/A time=00:01:44.70 bitrate=N/A dup=2000 drop=0 speed=0.896x elapsed=0:01:56.80    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream24.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 5268 fps= 45 q=31.0 size=N/A time=00:01:45.32 bitrate=N/A dup=2000 drop=0 speed=0.898x elapsed=0:01:57.34    frame= 5293 fps= 45 q=31.0 size=N/A time=00:01:45.82 bitrate=N/A dup=2000 drop=0 speed=0.898x elapsed=0:01:57.86    frame= 5331 fps= 45 q=31.0 size=N/A time=00:01:46.58 bitrate=N/A dup=2000 drop=0 speed= 0.9x elapsed=0:01:58.38    frame= 5367 fps= 45 q=31.0 size=N/A time=00:01:47.30 bitrate=N/A dup=2000 drop=0 speed=0.902x elapsed=0:01:58.89    frame= 5412 fps= 45 q=31.0 size=N/A time=00:01:48.20 bitrate=N/A dup=2000 drop=0 speed=0.906x elapsed=0:01:59.41    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/57/56-05000.ts' for reading
-[aist#0:1/aac @ 000002740c761640] timestamp discontinuity (stream id=0): 10003856, new offset= -10003680
-frame= 5454 fps= 45 q=31.0 size=N/A time=00:01:49.04 bitrate=N/A dup=2000 drop=0 speed=0.909x elapsed=0:01:59.92    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream25.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 5490 fps= 46 q=31.0 size=N/A time=00:01:49.76 bitrate=N/A dup=2000 drop=0 speed=0.911x elapsed=0:02:00.44    frame= 5520 fps= 46 q=31.0 size=N/A time=00:01:50.38 bitrate=N/A dup=2000 drop=0 speed=0.913x elapsed=0:02:00.96    frame= 5545 fps= 46 q=31.0 size=N/A time=00:01:50.86 bitrate=N/A dup=2000 drop=0 speed=0.913x elapsed=0:02:01.47    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream26.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 5582 fps= 46 q=31.0 size=N/A time=00:01:51.60 bitrate=N/A dup=2000 drop=0 speed=0.915x elapsed=0:02:01.99    frame= 5611 fps= 46 q=31.0 size=N/A time=00:01:52.18 bitrate=N/A dup=2000 drop=0 speed=0.916x elapsed=0:02:02.50    frame= 5648 fps= 46 q=31.0 size=N/A time=00:01:52.94 bitrate=N/A dup=2000 drop=0 speed=0.918x elapsed=0:02:03.02    frame= 5680 fps= 46 q=31.0 size=N/A time=00:01:53.58 bitrate=N/A dup=2000 drop=0 speed=0.919x elapsed=0:02:03.54    [https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/58/01-05000.ts' for reading
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream27.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 5702 fps= 46 q=31.0 size=N/A time=00:01:54.00 bitrate=N/A dup=2000 drop=0 speed=0.919x elapsed=0:02:04.08    frame= 5729 fps= 46 q=31.0 size=N/A time=00:01:54.54 bitrate=N/A dup=2250 drop=0 speed=0.919x elapsed=0:02:04.59    frame= 5769 fps= 46 q=31.0 size=N/A time=00:01:55.36 bitrate=N/A dup=2250 drop=0 speed=0.922x elapsed=0:02:05.10    frame= 5816 fps= 46 q=31.0 size=N/A time=00:01:56.30 bitrate=N/A dup=2250 drop=0 speed=0.926x elapsed=0:02:05.62    frame= 5866 fps= 47 q=31.0 size=N/A time=00:01:57.28 bitrate=N/A dup=2250 drop=0 speed=0.93x elapsed=0:02:06.13    frame= 5911 fps= 47 q=31.0 size=N/A time=00:01:58.18 bitrate=N/A dup=2250 drop=0 speed=0.933x elapsed=0:02:06.64    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream28.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 5946 fps= 47 q=31.0 size=N/A time=00:01:58.88 bitrate=N/A dup=2250 drop=0 speed=0.935x elapsed=0:02:07.16    frame= 5983 fps= 47 q=31.0 size=N/A time=00:01:59.62 bitrate=N/A dup=2250 drop=0 speed=0.937x elapsed=0:02:07.67    frame= 6011 fps= 47 q=31.0 size=N/A time=00:02:00.18 bitrate=N/A dup=2250 drop=0 speed=0.937x elapsed=0:02:08.20    frame= 6039 fps= 47 q=31.0 size=N/A time=00:02:00.74 bitrate=N/A dup=2250 drop=0 speed=0.938x elapsed=0:02:08.70    frame= 6075 fps= 47 q=31.0 size=N/A time=00:02:01.46 bitrate=N/A dup=2250 drop=0 speed=0.94x elapsed=0:02:09.22    frame= 6106 fps= 47 q=31.0 size=N/A time=00:02:02.12 bitrate=N/A dup=2250 drop=0 speed=0.941x elapsed=0:02:09.76    frame= 6131 fps= 47 q=31.0 size=N/A time=00:02:02.58 bitrate=N/A dup=2250 drop=0 speed=0.941x elapsed=0:02:10.27    frame= 6157 fps= 47 q=31.0 size=N/A time=00:02:03.10 bitrate=N/A dup=2250 drop=0 speed=0.941x elapsed=0:02:10.78    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-frame= 6184 fps= 47 q=31.0 size=N/A time=00:02:03.64 bitrate=N/A dup=2250 drop=0 speed=0.942x elapsed=0:02:11.30    [https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/58/06-05000.ts' for reading
-frame= 6199 fps= 47 q=31.0 size=N/A time=00:02:03.96 bitrate=N/A dup=2250 drop=0 speed=0.94x elapsed=0:02:11.82    frame= 6228 fps= 47 q=31.0 size=N/A time=00:02:04.52 bitrate=N/A dup=2250 drop=0 speed=0.941x elapsed=0:02:12.35    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream29.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 6261 fps= 47 q=31.0 size=N/A time=00:02:05.18 bitrate=N/A dup=2250 drop=0 speed=0.942x elapsed=0:02:12.86    frame= 6289 fps= 47 q=31.0 size=N/A time=00:02:05.74 bitrate=N/A dup=2250 drop=0 speed=0.943x elapsed=0:02:13.38    frame= 6320 fps= 47 q=31.0 size=N/A time=00:02:06.36 bitrate=N/A dup=2250 drop=0 speed=0.944x elapsed=0:02:13.89    frame= 6344 fps= 47 q=31.0 size=N/A time=00:02:06.84 bitrate=N/A dup=2250 drop=0 speed=0.944x elapsed=0:02:14.41    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream30.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 6362 fps= 47 q=31.0 size=N/A time=00:02:07.20 bitrate=N/A dup=2250 drop=0 speed=0.943x elapsed=0:02:14.92    frame= 6384 fps= 47 q=31.0 size=N/A time=00:02:07.64 bitrate=N/A dup=2250 drop=0 speed=0.942x elapsed=0:02:15.44    frame= 6403 fps= 47 q=31.0 size=N/A time=00:02:08.02 bitrate=N/A dup=2250 drop=0 speed=0.942x elapsed=0:02:15.96    frame= 6429 fps= 47 q=31.0 size=N/A time=00:02:08.54 bitrate=N/A dup=2250 drop=0 speed=0.942x elapsed=0:02:16.47    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/58/16-05000.ts' for reading
-frame= 6448 fps= 47 q=31.0 size=N/A time=00:02:08.92 bitrate=N/A dup=2250 drop=0 speed=0.941x elapsed=0:02:17.00    frame= 6466 fps= 47 q=31.0 size=N/A time=00:02:09.30 bitrate=N/A dup=2250 drop=0 speed=0.94x elapsed=0:02:17.52    frame= 6484 fps= 47 q=31.0 size=N/A time=00:02:09.64 bitrate=N/A dup=2250 drop=0 speed=0.939x elapsed=0:02:18.03    frame= 6509 fps= 47 q=31.0 size=N/A time=00:02:10.14 bitrate=N/A dup=2250 drop=0 speed=0.939x elapsed=0:02:18.55    frame= 6533 fps= 47 q=31.0 size=N/A time=00:02:10.62 bitrate=N/A dup=2250 drop=0 speed=0.939x elapsed=0:02:19.07    frame= 6557 fps= 47 q=31.0 size=N/A time=00:02:11.10 bitrate=N/A dup=2250 drop=0 speed=0.939x elapsed=0:02:19.58    frame= 6581 fps= 47 q=31.0 size=N/A time=00:02:11.58 bitrate=N/A dup=2250 drop=0 speed=0.939x elapsed=0:02:20.10    frame= 6603 fps= 47 q=31.0 size=N/A time=00:02:12.02 bitrate=N/A dup=2250 drop=0 speed=0.939x elapsed=0:02:20.61    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream31.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 6622 fps= 47 q=31.0 size=N/A time=00:02:12.40 bitrate=N/A dup=2250 drop=0 speed=0.938x elapsed=0:02:21.13    frame= 6648 fps= 47 q=31.0 size=N/A time=00:02:12.92 bitrate=N/A dup=2250 drop=0 speed=0.938x elapsed=0:02:21.65    frame= 6666 fps= 47 q=31.0 size=N/A time=00:02:13.28 bitrate=N/A dup=2250 drop=0 speed=0.937x elapsed=0:02:22.17    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-[https @ 000002740c5e91c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/58/21-05000.ts' for reading
-frame= 6681 fps= 47 q=31.0 size=N/A time=00:02:13.58 bitrate=N/A dup=2250 drop=0 speed=0.936x elapsed=0:02:22.68    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream32.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 6697 fps= 47 q=31.0 size=N/A time=00:02:13.90 bitrate=N/A dup=2250 drop=0 speed=0.935x elapsed=0:02:23.19    frame= 6712 fps= 47 q=31.0 size=N/A time=00:02:14.20 bitrate=N/A dup=2500 drop=0 speed=0.934x elapsed=0:02:23.71    frame= 6746 fps= 47 q=31.0 size=N/A time=00:02:14.88 bitrate=N/A dup=2500 drop=0 speed=0.935x elapsed=0:02:24.23    frame= 6771 fps= 47 q=31.0 size=N/A time=00:02:15.38 bitrate=N/A dup=2500 drop=0 speed=0.935x elapsed=0:02:24.74    frame= 6804 fps= 47 q=31.0 size=N/A time=00:02:16.06 bitrate=N/A dup=2500 drop=0 speed=0.937x elapsed=0:02:25.25    frame= 6841 fps= 47 q=31.0 size=N/A time=00:02:16.78 bitrate=N/A dup=2500 drop=0 speed=0.938x elapsed=0:02:25.77    frame= 6879 fps= 47 q=31.0 size=N/A time=00:02:17.54 bitrate=N/A dup=2500 drop=0 speed=0.94x elapsed=0:02:26.28    frame= 6905 fps= 47 q=31.0 size=N/A time=00:02:18.06 bitrate=N/A dup=2500 drop=0 speed=0.94x elapsed=0:02:26.80    frame= 6927 fps= 47 q=31.0 size=N/A time=00:02:18.50 bitrate=N/A dup=2500 drop=0 speed=0.94x elapsed=0:02:27.31    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream33.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 6961 fps= 47 q=31.0 size=N/A time=00:02:19.18 bitrate=N/A dup=2500 drop=0 speed=0.941x elapsed=0:02:27.83    frame= 6983 fps= 47 q=31.0 size=N/A time=00:02:19.62 bitrate=N/A dup=2500 drop=0 speed=0.941x elapsed=0:02:28.35    frame= 7015 fps= 47 q=31.0 size=N/A time=00:02:20.26 bitrate=N/A dup=2500 drop=0 speed=0.942x elapsed=0:02:28.87    frame= 7041 fps= 47 q=31.0 size=N/A time=00:02:20.78 bitrate=N/A dup=2500 drop=0 speed=0.942x elapsed=0:02:29.38    frame= 7062 fps= 47 q=31.0 size=N/A time=00:02:21.20 bitrate=N/A dup=2500 drop=0 speed=0.942x elapsed=0:02:29.91    frame= 7080 fps= 47 q=31.0 size=N/A time=00:02:21.56 bitrate=N/A dup=2500 drop=0 speed=0.941x elapsed=0:02:30.43    frame= 7099 fps= 47 q=31.0 size=N/A time=00:02:21.94 bitrate=N/A dup=2500 drop=0 speed=0.94x elapsed=0:02:30.94    frame= 7128 fps= 47 q=31.0 size=N/A time=00:02:22.52 bitrate=N/A dup=2500 drop=0 speed=0.941x elapsed=0:02:31.46    frame= 7153 fps= 47 q=31.0 size=N/A time=00:02:23.02 bitrate=N/A dup=2500 drop=0 speed=0.941x elapsed=0:02:31.97    [https @ 000002741f97e980] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/mono.m3u8' for reading
-frame= 7174 fps= 47 q=31.0 size=N/A time=00:02:23.44 bitrate=N/A dup=2500 drop=0 speed=0.941x elapsed=0:02:32.49    [hls @ 000002740c1b65c0] skipping 1 segments ahead, expired from playlists
-[https @ 000002740c6cb0c0] Opening 'https://tv.kooraiq.com:4433/beIN_sport5/tracks-v1a1/2025/08/16/09/58/31-05000.ts' for reading
-frame= 7194 fps= 47 q=31.0 size=N/A time=00:02:23.84 bitrate=N/A dup=2500 drop=0 speed=0.94x elapsed=0:02:33.05    frame= 7221 fps= 47 q=31.0 size=N/A time=00:02:24.38 bitrate=N/A dup=2500 drop=0 speed=0.94x elapsed=0:02:33.57    frame= 7241 fps= 47 q=31.0 size=N/A time=00:02:24.78 bitrate=N/A dup=2500 drop=0 speed=0.94x elapsed=0:02:34.08    [hls @ 000002740c7b3f00] Opening 'live\channel_18\stream34.ts' for writing
-[hls @ 000002740c7b3f00] Opening 'live\channel_18\stream.m3u8.tmp' for writing
-frame= 7263 fps= 47 q=31.0 size=N/A time=00:02:25.22 bitrate=N/A dup=2500 drop=0 speed=0.939x elapsed=0:02:34.60    frame= 7286 fps= 47 q=31.0 size=N/A time=00:02:25.68 bitrate=N/A dup=2500 drop=0 speed=0.939x elapsed=0:02:35.11    frame= 7305 fps= 47 q=31.0 size=N/A time=00:02:26.06 bitrate=N/A dup=2500 drop=0 speed=0.938x elapsed=0:02:35.65    frame= 7325 fps= 47 q=31.0 size=N/A time=00:02:26.46 bitrate=N/A dup=2500 drop=0 speed=0.938x elapsed=0:02:36.16    frame= 7349 fps= 47 q=31.0 size=N/A time=00:02:26.94 bitrate=N/A dup=2500 drop=0 speed=0.938x elapsed=0:02:36.69    frame= 7374 fps= 47 q=31.0 size=N/A time=00:02:27.44 bitrate=N/A dup=2500 drop=0 speed=0.938x elapsed=0:02:37.20    
