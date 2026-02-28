@@ -42,6 +42,8 @@ if ($viewersRes && $vw = $viewersRes->fetch_assoc()) {
         .channel-img-sm { width: 50px; height: 50px; object-fit: contain; background-color: #212529; border-radius: 0.5rem; padding: 5px; box-sizing: border-box; }
         .action-btn { transition: all 0.2s ease-in-out; }
         .action-btn:hover { transform: scale(1.1); }
+        .perf-card .label { font-size: .85rem; color: #6c757d; }
+        .perf-card .value { font-weight: 700; font-size: 1rem; word-break: break-word; }
     </style>
 </head>
 <body>
@@ -77,6 +79,41 @@ if ($viewersRes && $vw = $viewersRes->fetch_assoc()) {
                         <i class="bi bi-people fs-1 text-warning"></i>
                         <h6 class="text-muted mt-2 mb-1">المشاهدون الآن</h6>
                         <h3 class="mb-0" id="live-viewers-count"><?= number_format($total_viewers) ?></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-4" id="server-performance-row">
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-cpu me-1"></i>حمل المعالج (1m)</div>
+                        <div class="value" id="server-cpu-load">--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-memory me-1"></i>استخدام الذاكرة</div>
+                        <div class="value" id="server-memory-usage">--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-hdd-network me-1"></i>استخدام القرص</div>
+                        <div class="value" id="server-disk-usage">--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm border-0 h-100 perf-card">
+                    <div class="card-body">
+                        <div class="label mb-1"><i class="bi bi-clock-history me-1"></i>مدة تشغيل السيرفر</div>
+                        <div class="value" id="server-uptime">--</div>
                     </div>
                 </div>
             </div>
@@ -118,6 +155,10 @@ if ($viewersRes && $vw = $viewersRes->fetch_assoc()) {
 document.addEventListener('DOMContentLoaded', function() {
     const statusTableBody = document.getElementById('channels-status-table');
     const lastUpdateTimeElem = document.getElementById('last-update-time');
+    const serverCpuLoadElem = document.getElementById('server-cpu-load');
+    const serverMemoryUsageElem = document.getElementById('server-memory-usage');
+    const serverDiskUsageElem = document.getElementById('server-disk-usage');
+    const serverUptimeElem = document.getElementById('server-uptime');
 
     const statusClasses = {
         running: { badge: 'bg-success', icon: 'bi-check-circle-fill' },
@@ -156,6 +197,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function updateServerStats(stats) {
+        if (!stats) {
+            serverCpuLoadElem.textContent = '--';
+            serverMemoryUsageElem.textContent = '--';
+            serverDiskUsageElem.textContent = '--';
+            serverUptimeElem.textContent = '--';
+            return;
+        }
+
+        serverCpuLoadElem.textContent = stats.cpu_load_text || '--';
+        serverMemoryUsageElem.textContent = stats.memory_used_text || '--';
+        serverDiskUsageElem.textContent = stats.disk_used_text || '--';
+        serverUptimeElem.textContent = stats.uptime_text || '--';
+    }
+
     async function fetchStatus() {
         try {
             const response = await fetch('api_status.php');
@@ -167,6 +223,8 @@ document.addEventListener('DOMContentLoaded', function() {
             statusTableBody.innerHTML = '';
             const runningCount = (data.channels || []).filter(c => c.status_code === 'running').length;
             document.getElementById('live-viewers-count').textContent = new Intl.NumberFormat('ar-EG').format(runningCount);
+
+            updateServerStats(data.server_stats || null);
 
             if (data.channels && data.channels.length > 0) {
                 data.channels.forEach(channel => {
@@ -200,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error("Failed to fetch status:", error);
+            updateServerStats(null);
             statusTableBody.innerHTML = `<tr><td colspan="9" class="text-center p-4 text-danger">فشل في تحميل البيانات. تأكد من أن سكربت البث يعمل وأن ملف api_status.php صحيح.</td></tr>`;
         }
     }
