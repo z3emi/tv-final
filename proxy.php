@@ -29,6 +29,8 @@ if (!$host) {
   http_response_code(400); exit('Bad host');
 }
 
+$originBase = ($parts['scheme'] ?? 'http') . '://' . $host;
+
 $ch = curl_init($target);
 curl_setopt_array($ch, [
   CURLOPT_FOLLOWLOCATION => true,
