@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 $id = $_GET["id"];
 $mysqli->query("DELETE FROM channels WHERE id = $id");
 

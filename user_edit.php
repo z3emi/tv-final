@@ -5,7 +5,7 @@ include 'auth_check.php';
 // طلب صلاحية "مدير" لهذه الصفحة
 require_admin();
 
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'")->fetch_assoc()['setting_value'] ?? 'Admin Panel';
 $id = $_GET['id'] ?? 0;
 $message = '';

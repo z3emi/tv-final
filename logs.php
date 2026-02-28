@@ -2,7 +2,7 @@
 require_once 'config.php';
 session_start();
 if (!isset($_SESSION['user'])) { header('Location: login.php'); exit(); }
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 $logs = $mysqli->query("SELECT logs.*, users.username FROM logs LEFT JOIN users ON users.id = logs.user_id ORDER BY logs.id DESC");
 ?>
 <!DOCTYPE html>

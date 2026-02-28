@@ -1,12 +1,15 @@
 <?php
-require_once 'config.php';
+$website_title = 'Stream System';
 
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
-if ($mysqli->connect_error) { http_response_code(500); echo "Database connection failed."; exit; }
-
-// نفس طريقة الرئيسية لسحب العنوان
-$website_title = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'")
-    ->fetch_assoc()['setting_value'] ?? 'Stream System';
+mysqli_report(MYSQLI_REPORT_OFF);
+$mysqli = @new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
+if (!$mysqli->connect_errno) {
+    $res = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'");
+    if ($res && $row = $res->fetch_assoc()) {
+        $website_title = $row['setting_value'] ?? $website_title;
+    }
+    $mysqli->close();
+}
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -217,76 +220,58 @@ $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE settin
         const matchDetailsModal = new bootstrap.Modal(document.getElementById('matchDetailsModal'));
         let allMatches = [];
 
-        // ترجمة بعض أسماء الدوريات
         const leagueTranslations = {
             "English Premier League": "الدوري الإنجليزي الممتاز",
             "Spanish La Liga": "الدوري الإسباني",
             "UEFA Champions League": "دوري أبطال أوروبا",
             "German Bundesliga": "الدوري الألماني",
-            "Italian Serie A": "الدوري الإيطالي"
+            "Italian Serie A": "الدوري الإيطالي",
+            "جدول محلي": "جدول محلي"
         };
 
         function formatDate(date) { return date.toISOString().slice(0, 10); }
 
-        // تحويل وقت الـ API (UTC غالبًا) إلى +3 وتنسيقه 12 ساعة
         function formatTo12Hour(dateString, timeString) {
-            if (!dateString || !timeString || timeString.length < 5) return "";
+            if (!dateString || !timeString || timeString.length < 5) return "--";
             const utcDate = new Date(`${dateString}T${timeString}Z`);
-            utcDate.setHours(utcDate.getHours() + 3); // تعويض فرق التوقيت +3
+            if (Number.isNaN(utcDate.getTime())) return timeString.slice(0,5);
+            utcDate.setHours(utcDate.getHours() + 3);
             let hours = utcDate.getUTCHours();
             let minutes = utcDate.getUTCMinutes();
             let period = 'ص';
-            if (hours >= 12) { period = 'م'; }
-            if (hours > 12) { hours -= 12; }
-            if (hours === 0) { hours = 12; }
+            if (hours >= 12) period = 'م';
+            if (hours > 12) hours -= 12;
+            if (hours === 0) hours = 12;
             minutes = minutes < 10 ? '0' + minutes : minutes;
             return `${hours}:${minutes} ${period}`;
         }
 
-        async function fetchAllSeasonData() {
+        async function fetchMatchesForDate(dateString) {
             spinner.style.display = 'flex';
             matchesGrid.innerHTML = '';
-
-            const leagueIds = ['4328', '4335', '4480', '4332', '4331'];
-            const currentYear = new Date().getFullYear();
-            const month = new Date().getMonth();
-            const season = month >= 7 ? `${currentYear}-${currentYear + 1}` : `${currentYear - 1}-${currentYear}`;
-
-            const fetchPromises = leagueIds.map(id =>
-                fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsseason.php?id=${id}&s=${season}`).then(r => r.json())
-            );
-
             try {
-                const results = await Promise.all(fetchPromises);
-                allMatches = results.flatMap(result => result.events || []);
+                const response = await fetch(`api_schedule.php?date=${encodeURIComponent(dateString)}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                allMatches = Array.isArray(data.events) ? data.events : [];
+
                 if (allMatches.length === 0) {
-                    matchesGrid.innerHTML = `<p style="text-align:center; width:100%;">لم يتم العثور على جداول للموسم الحالي بعد.</p>`;
-                    spinner.style.display = 'none';
-                    return;
+                    matchesGrid.innerHTML = `<p style="text-align:center; width:100%;">لا توجد مباريات متاحة في هذا اليوم.</p>`;
+                } else {
+                    allMatches.sort((a, b) => (a.strTime || '').localeCompare(b.strTime || ''));
+                    allMatches.forEach(match => matchesGrid.appendChild(createMatchCard(match)));
                 }
-                const today = new Date();
-                displayMatchesForDate(formatDate(today));
+
+                if (data.source === 'fallback') {
+                    matchesGrid.insertAdjacentHTML('afterbegin', `<p style="grid-column:1/-1;text-align:center;color:#ffca28;">تم عرض جدول احتياطي محلي لأن مزود الـ API غير متاح حالياً.</p>`);
+                }
             } catch (error) {
-                matchesGrid.innerHTML = `<p style="text-align:center; width:100%; color: #ff5252;">فشل تحميل بيانات الموسم.</p>`;
+                matchesGrid.innerHTML = `<p style="text-align:center; width:100%; color: #ff5252;">فشل تحميل جدول المباريات.</p>`;
             } finally {
-                if (allMatches.length > 0) { spinner.style.display = 'none'; }
+                spinner.style.display = 'none';
             }
         }
 
-        function displayMatchesForDate(dateString) {
-            matchesGrid.innerHTML = '';
-            const dayMatches = allMatches.filter(match => match.dateEvent === dateString);
-            if (dayMatches.length > 0) {
-                dayMatches.sort((a, b) => (a.strTime || "").localeCompare(b.strTime || ""));
-                dayMatches.forEach(match => {
-                    matchesGrid.appendChild(createMatchCard(match));
-                });
-            } else {
-                matchesGrid.innerHTML = `<p style="text-align:center; width:100%;">لا توجد مباريات متاحة في هذا اليوم.</p>`;
-            }
-        }
-
-        // التنقل بين الأيام
         dateNavButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 dateNavButtons.forEach(btn => btn.classList.remove('active'));
@@ -294,11 +279,10 @@ $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE settin
                 const offset = parseInt(e.currentTarget.dataset.dayOffset);
                 const targetDate = new Date();
                 targetDate.setDate(targetDate.getDate() + offset);
-                displayMatchesForDate(formatDate(targetDate));
+                fetchMatchesForDate(formatDate(targetDate));
             });
         });
 
-        // فتح المودال عند الضغط على كارت مباراة
         matchesGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.match-card');
             if (!card) return;
@@ -314,39 +298,10 @@ $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE settin
             document.getElementById('modalDateTime').textContent = `${matchData.dateEvent} - ${formatTo12Hour(matchData.dateEvent, matchData.strTime)}`;
             document.getElementById('modalHomeTeamName').textContent = matchData.strHomeTeam;
             document.getElementById('modalAwayTeamName').textContent = matchData.strAwayTeam;
-
-            // إحصائيات البطاقات
-            let homeStatsHTML = '';
-            if (matchData.strHomeYellowCards) homeStatsHTML += `<span class="stat-item">${matchData.strHomeYellowCards} <i class="bi bi-square-fill yellow-card"></i></span>`;
-            if (matchData.strHomeRedCards) homeStatsHTML += `<span class="stat-item">${matchData.strHomeRedCards} <i class="bi bi-square-fill red-card"></i></span>`;
-            document.getElementById('modalHomeStats').innerHTML = homeStatsHTML || 'لا توجد بيانات';
-
-            let awayStatsHTML = '';
-            if (matchData.strAwayYellowCards) awayStatsHTML += `<span class="stat-item">${matchData.strAwayYellowCards} <i class="bi bi-square-fill yellow-card"></i></span>`;
-            if (matchData.strAwayRedCards) awayStatsHTML += `<span class="stat-item">${matchData.strAwayRedCards} <i class="bi bi-square-fill red-card"></i></span>`;
-            document.getElementById('modalAwayStats').innerHTML = awayStatsHTML || 'لا توجد بيانات';
-
-            const formatLineup = (gk, def, mid, fwd) => {
-                let lineupHtml = '<li>(غير متوفرة)</li>';
-                if (gk) {
-                    lineupHtml = [gk, def, mid, fwd].filter(Boolean)
-                                .flatMap(p => p.split(';'))
-                                .map(player => `<li>${player.trim()}</li>`).join('');
-                }
-                return lineupHtml;
-            };
-            document.getElementById('modalHomeLineup').innerHTML = formatLineup(
-                matchData.strHomeLineupGoalkeeper,
-                matchData.strHomeLineupDefense,
-                matchData.strHomeLineupMidfield,
-                matchData.strHomeLineupForward
-            );
-            document.getElementById('modalAwayLineup').innerHTML = formatLineup(
-                matchData.strAwayLineupGoalkeeper,
-                matchData.strAwayLineupDefense,
-                matchData.strAwayLineupMidfield,
-                matchData.strAwayLineupForward
-            );
+            document.getElementById('modalHomeStats').innerHTML = 'لا توجد بيانات';
+            document.getElementById('modalAwayStats').innerHTML = 'لا توجد بيانات';
+            document.getElementById('modalHomeLineup').innerHTML = '<li>(غير متوفرة)</li>';
+            document.getElementById('modalAwayLineup').innerHTML = '<li>(غير متوفرة)</li>';
 
             const highlightsBtn = document.getElementById('modalHighlightsBtn');
             if (matchData.strVideo) {
@@ -359,9 +314,10 @@ $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE settin
             matchDetailsModal.show();
         });
 
-        document.addEventListener('DOMContentLoaded', () => { fetchAllSeasonData(); });
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchMatchesForDate(formatDate(new Date()));
+        });
 
-        // أدوات مساعدة
         const createTeamLogo = (teamName, logoUrl) => {
             if (logoUrl) return `<div class="team-logo"><img src="${logoUrl}" alt="${teamName}"></div>`;
             const initial = teamName ? teamName.charAt(0).toUpperCase() : '?';
@@ -377,7 +333,7 @@ $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE settin
             let statusClass = 'status-scheduled';
             if (match.strStatus === 'Match Finished') {
                 statusClass = 'status-finished'; statusText = 'انتهت';
-            } else if (match.intHomeScore !== null) {
+            } else if (match.intHomeScore !== null && match.intAwayScore !== null) {
                 statusClass = 'status-live'; statusText = 'جارية';
             } else {
                 statusText = formatTo12Hour(match.dateEvent, match.strTime);
@@ -385,20 +341,15 @@ $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE settin
 
             const homeLogoHtml = createTeamLogo(match.strHomeTeam, match.strHomeTeamBadge);
             const awayLogoHtml = createTeamLogo(match.strAwayTeam, match.strAwayTeamBadge);
-
-            let tvStationHtml = '';
-            const tvStation = match.strTVStation;
-            const localChannels = ['bein','ssc','ad sports','dubai sports','alkass','ksa sports','sharjah','on time'];
-            if (tvStation) {
-                const isLocal = localChannels.some(ch => tvStation.toLowerCase().includes(ch));
-                if (isLocal) {
-                    tvStationHtml = `<div class="match-footer"><i class="bi bi-tv"></i><span>${tvStation}</span></div>`;
-                }
-            }
-
             const leagueName = leagueTranslations[match.strLeague] || match.strLeague;
             const homeTeamName = match.strHomeTeam || '';
             const awayTeamName = match.strAwayTeam || '';
+
+            const tvStation = match.strTVStation;
+            let tvStationHtml = '';
+            if (tvStation) {
+                tvStationHtml = `<div class="match-footer"><i class="bi bi-tv"></i><span>${tvStation}</span></div>`;
+            }
 
             card.innerHTML = `
                 <div class="match-header"><span>${leagueName}</span></div>
