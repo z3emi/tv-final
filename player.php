@@ -71,6 +71,26 @@ if ($audio_url !== '' && !preg_match('~^https?://~i', $audio_url)) {
     $audio_url = "$scheme://$host/$path";
 }
 
+// عند فتح الصفحة عبر HTTPS، بعض المتصفحات تمنع بث HTTP (Mixed Content).
+// نمرر روابط HTTP عبر proxy.php لكي تعمل القنوات بشكل طبيعي.
+function maybe_proxy_insecure_stream(string $streamUrl): string {
+    if ($streamUrl === '' || !preg_match('~^http://~i', $streamUrl)) {
+        return $streamUrl;
+    }
+
+    $isHttpsRequest = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    if (!$isHttpsRequest) {
+        return $streamUrl;
+    }
+
+    return 'proxy.php?u=' . rtrim(strtr(base64_encode($streamUrl), '+/', '-_'), '=');
+}
+
+$url = maybe_proxy_insecure_stream($url);
+if ($audio_url !== '') {
+    $audio_url = maybe_proxy_insecure_stream($audio_url);
+}
+
 $website_title = 'Player';
 if (isset($mysqli)) {
     $rs = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'");
