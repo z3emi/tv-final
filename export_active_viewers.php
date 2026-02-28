@@ -3,7 +3,7 @@ require_once 'config.php';
 session_start();
 if (!isset($_SESSION['user'])) { header('Location: login.php'); exit(); }
 
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=viewers_export.csv');

@@ -1,0 +1,19 @@
+[Unit]
+Description=IPTV Stream Manager (stream_with_latency.py)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/workspace/tv-final
+Environment=TV_LIVE_ROOT=/workspace/tv-final/live
+Environment=TV_CHANNELS_FILE=/workspace/tv-final/channels.txt
+Environment=TV_FFMPEG_PATH=/usr/bin/ffmpeg
+ExecStart=/usr/bin/python3 /workspace/tv-final/stream_with_latency.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

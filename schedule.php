@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
 
-$mysqli = new mysqli("localhost", "root", "", "stream_db");
+$mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
 if ($mysqli->connect_error) { http_response_code(500); echo "Database connection failed."; exit; }
 
 // نفس طريقة الرئيسية لسحب العنوان

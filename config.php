@@ -4,9 +4,9 @@ session_start();
 
 // بيانات الاتصال بقاعدة البيانات
 $db_host = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "stream_db";
+$db_user = "tv_admin";
+$db_pass = "TvPassword2026!";
+$db_name = "tv_db";
 
 // أنشئ متغير اتصال واحد ومتناسق
 $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);

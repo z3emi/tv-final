@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) { header('Location: login.php'); exit(); }
 $id = $_GET['id'] ?? 0;
 // Prevent deleting the main admin user (ID 1)
 if ($id > 1) {
-    $mysqli = new mysqli("localhost", "root", "", "stream_db");
+    $mysqli = new mysqli("localhost", "tv_admin", "TvPassword2026!", "tv_db");
     $stmt = $mysqli->prepare("DELETE FROM users WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();

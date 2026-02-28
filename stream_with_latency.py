@@ -11,7 +11,7 @@ import psutil
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 DEFAULT_LIVE_ROOT = os.environ.get("TV_LIVE_ROOT", os.path.join(SCRIPT_DIR, "live"))
-DEFAULT_FFMPEG = os.environ.get("TV_FFMPEG_PATH") or shutil.which("ffmpeg") or "/usr/bin/ffmpeg"
+DEFAULT_FFMPEG = os.environ.get("TV_FFMPEG_PATH", "/usr/bin/ffmpeg")
 
 # --- الإعدادات النهائية والمستقرة ---
 CONFIG = {
