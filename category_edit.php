@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $mysqli->prepare("UPDATE categories SET name = ? WHERE id = ?");
     $stmt->bind_param("si", $name, $id);
     $stmt->execute();
-    header("Location: categories.php");
+    header("Location: dashboard.php#categories");
     exit();
 }
 
@@ -38,7 +38,7 @@ $category = $mysqli->query("SELECT * FROM categories WHERE id = $id")->fetch_ass
                         <input type="text" name="name" id="name" class="form-control" value="<?= htmlspecialchars($category['name']) ?>" required>
                     </div>
                     <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
-                    <a href="categories.php" class="btn btn-secondary">إلغاء</a>
+                    <a href="dashboard.php" class="btn btn-secondary">إلغاء</a>
                 </form>
             </div>
         </div>

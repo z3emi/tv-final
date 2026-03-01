@@ -225,6 +225,9 @@ if (!$mysqli->connect_errno) {
         const dateNavButtons = document.querySelectorAll('.date-nav button');
         const matchDetailsModal = new bootstrap.Modal(document.getElementById('matchDetailsModal'));
         let allMatches = [];
+        let isLoading = false;
+        let retryCount = 0;
+        const maxRetries = 2;
 
         const leagueTranslations = {
             "English Premier League": "الدوري الإنجليزي الممتاز",
@@ -235,49 +238,135 @@ if (!$mysqli->connect_errno) {
             "جدول محلي": "جدول محلي"
         };
 
-        function formatDate(date) { return date.toISOString().slice(0, 10); }
+        function formatDate(date) { 
+            return date.toISOString().slice(0, 10); 
+        }
 
         function formatTo12Hour(dateString, timeString) {
             if (!dateString || !timeString || timeString.length < 5) return "--";
-            const utcDate = new Date(`${dateString}T${timeString}Z`);
-            if (Number.isNaN(utcDate.getTime())) return timeString.slice(0,5);
-            utcDate.setHours(utcDate.getHours() + 3);
-            let hours = utcDate.getUTCHours();
-            let minutes = utcDate.getUTCMinutes();
-            let period = 'ص';
-            if (hours >= 12) period = 'م';
-            if (hours > 12) hours -= 12;
-            if (hours === 0) hours = 12;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            return `${hours}:${minutes} ${period}`;
-        }
-
-        async function fetchMatchesForDate(dateString) {
-            spinner.style.display = 'flex';
-            matchesGrid.innerHTML = '';
             try {
-                const response = await fetch(`api_schedule.php?date=${encodeURIComponent(dateString)}`);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const data = await response.json();
-                allMatches = Array.isArray(data.events) ? data.events : [];
-
-                if (allMatches.length === 0) {
-                    matchesGrid.innerHTML = `<p style="text-align:center; width:100%;">لا توجد مباريات متاحة في هذا اليوم.</p>`;
-                } else {
-                    allMatches.sort((a, b) => (a.strTime || '').localeCompare(b.strTime || ''));
-                    allMatches.forEach(match => matchesGrid.appendChild(createMatchCard(match)));
-                }
-
-                if (data.source === 'fallback') {
-                    matchesGrid.insertAdjacentHTML('afterbegin', `<p style="grid-column:1/-1;text-align:center;color:#ffca28;">تم عرض جدول احتياطي محلي لأن مزود الـ API غير متاح حالياً.</p>`);
-                }
-            } catch (error) {
-                matchesGrid.innerHTML = `<p style="text-align:center; width:100%; color: #ff5252;">فشل تحميل جدول المباريات.</p>`;
-            } finally {
-                spinner.style.display = 'none';
+                const utcDate = new Date(`${dateString}T${timeString}Z`);
+                if (Number.isNaN(utcDate.getTime())) return timeString.slice(0,5);
+                utcDate.setHours(utcDate.getHours() + 3);
+                let hours = utcDate.getUTCHours();
+                let minutes = utcDate.getUTCMinutes();
+                let period = 'ص';
+                if (hours >= 12) period = 'م';
+                if (hours > 12) hours -= 12;
+                if (hours === 0) hours = 12;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                return `${hours}:${minutes} ${period}`;
+            } catch (e) {
+                return timeString.slice(0,5);
             }
         }
 
+        async function fetchMatchesForDate(dateString, retry = 0) {
+            if (isLoading) return;
+            
+            isLoading = true;
+            spinner.style.display = 'flex';
+            matchesGrid.innerHTML = '';
+            retryCount = retry;
+            
+            try {
+                const cacheKey = `schedule_${dateString}`;
+                const cached = sessionStorage.getItem(cacheKey);
+                
+                const response = await fetch(`api_schedule.php?date=${encodeURIComponent(dateString)}&_t=${Date.now()}`, {
+                    method: 'GET',
+                    cache: 'no-cache',
+                    headers: {
+                        'Pragma': 'no-cache',
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+                
+                if (!response.ok) {
+                    if (retry < maxRetries) {
+                        console.log(`محاولة إعادة جلب البيانات... (محاولة ${retry + 1})`);
+                        setTimeout(() => fetchMatchesForDate(dateString, retry + 1), 1500);
+                        return;
+                    }
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.events) {
+                    throw new Error('تنسيق البيانات غير صحيح');
+                }
+
+                allMatches = Array.isArray(data.events) ? data.events : [];
+
+                if (allMatches.length === 0) {
+                    matchesGrid.innerHTML = `
+                        <div style="grid-column:1/-1; text-align:center; padding:2rem; color:#aaa;">
+                            <i class="bi bi-calendar-x" style="font-size:2.5rem; margin-bottom:1rem; display:block;"></i>
+                            <p>لا توجد مباريات متاحة في هذا اليوم</p>
+                        </div>
+                    `;
+                } else {
+                    allMatches.sort((a, b) => (a.strTime || '').localeCompare(b.strTime || ''));
+                    
+                    // إضافة رسالة حسب المصدر
+                    let sourceInfo = '';
+                    if (data.source === 'local' || data.source === 'fallback') {
+                        sourceInfo = `<div style="grid-column:1/-1; text-align:center; padding:0.75rem; background:linear-gradient(135deg, rgba(76,175,80,0.15), rgba(33,150,243,0.15)); border-radius:8px; margin-bottom:1.5rem; font-size:0.9rem; color:#4caf50; border:1px solid rgba(76,175,80,0.3);">
+                            ✅ بيانات محلية محديثة مع شعارات الفرق الحقيقية
+                        </div>`;
+                    } else if (data.source === 'football-data') {
+                        sourceInfo = `<div style="grid-column:1/-1; text-align:center; padding:0.75rem; background:linear-gradient(135deg, rgba(33,150,243,0.15), rgba(156,39,176,0.15)); border-radius:8px; margin-bottom:1.5rem; font-size:0.9rem; color:#2196f3; border:1px solid rgba(33,150,243,0.3);">
+                            🔄 بيانات حية من Football-Data API
+                        </div>`;
+                    }
+                    
+                    if (sourceInfo) matchesGrid.insertAdjacentHTML('beforeend', sourceInfo);
+                    allMatches.forEach(match => matchesGrid.appendChild(createMatchCard(match)));
+                }
+                
+                // حفظ في الذاكرة المؤقتة
+                sessionStorage.setItem(cacheKey, JSON.stringify(allMatches));
+                
+            } catch (error) {
+                console.error('خطأ في جلب البيانات:', error);
+                
+                // محاولة استخدام البيانات المخزنة مؤقتاً
+                const cacheKey = `schedule_${dateString}`;
+                const cached = sessionStorage.getItem(cacheKey);
+                
+                if (cached) {
+                    try {
+                        allMatches = JSON.parse(cached);
+                        allMatches.forEach(match => matchesGrid.appendChild(createMatchCard(match)));
+                        matchesGrid.insertAdjacentHTML('afterbegin', `
+                            <div style="grid-column:1/-1; text-align:center; padding:0.5rem; background:rgba(255,107,107,0.1); border-radius:8px; margin-bottom:1rem; font-size:0.85rem; color:#ff6b6b;">
+                                📌 عرض البيانات المحفوظة (قد تكون قديمة)
+                            </div>
+                        `);
+                        return;
+                    } catch (e) {
+                        console.error('خطأ في استخدام البيانات المخزنة:', e);
+                    }
+                }
+                
+                matchesGrid.innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; padding:2rem; color:#ff6b6b;">
+                        <i class="bi bi-exclamation-triangle" style="font-size:2.5rem; margin-bottom:1rem; display:block;"></i>
+                        <p>فشل تحميل جدول المباريات</p>
+                        <p style="font-size:0.85rem; color:#aaa; margin-top:0.5rem;">جاري عرض البيانات المحفوظة...</p>
+                        <button class="btn btn-sm btn-warning mt-2" onclick="location.reload()">
+                            <i class="bi bi-arrow-clockwise me-2"></i>حاول مجدداً
+                        </button>
+                    </div>
+                `;
+            } finally {
+                spinner.style.display = 'none';
+                isLoading = false;
+            }
+        }
+
+        // معالج الأزرار
         dateNavButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 dateNavButtons.forEach(btn => btn.classList.remove('active'));
@@ -285,10 +374,11 @@ if (!$mysqli->connect_errno) {
                 const offset = parseInt(e.currentTarget.dataset.dayOffset);
                 const targetDate = new Date();
                 targetDate.setDate(targetDate.getDate() + offset);
-                fetchMatchesForDate(formatDate(targetDate));
+                fetchMatchesForDate(formatDate(targetDate), 0);
             });
         });
 
+        // معالج النقر على البطاقات
         matchesGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.match-card');
             if (!card) return;
@@ -320,12 +410,8 @@ if (!$mysqli->connect_errno) {
             matchDetailsModal.show();
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchMatchesForDate(formatDate(new Date()));
-        });
-
         const createTeamLogo = (teamName, logoUrl) => {
-            if (logoUrl) return `<div class="team-logo"><img src="${logoUrl}" alt="${teamName}"></div>`;
+            if (logoUrl) return `<div class="team-logo"><img src="${logoUrl}" alt="${teamName}" loading="lazy"></div>`;
             const initial = teamName ? teamName.charAt(0).toUpperCase() : '?';
             return `<div class="team-logo"><span>${initial}</span></div>`;
         };
@@ -337,10 +423,13 @@ if (!$mysqli->connect_errno) {
 
             let statusText = 'مجدولة';
             let statusClass = 'status-scheduled';
-            if (match.strStatus === 'Match Finished') {
-                statusClass = 'status-finished'; statusText = 'انتهت';
-            } else if (match.intHomeScore !== null && match.intAwayScore !== null) {
-                statusClass = 'status-live'; statusText = 'جارية';
+            if (match.strStatus === 'Match Finished' || match.strStatus === 'Final') {
+                statusClass = 'status-finished'; 
+                statusText = 'انتهت';
+            } else if (match.intHomeScore !== null && match.intAwayScore !== null && 
+                       match.strStatus !== 'Match Finished' && match.strStatus !== 'Final') {
+                statusClass = 'status-live'; 
+                statusText = 'جارية';
             } else {
                 statusText = formatTo12Hour(match.dateEvent, match.strTime);
             }
@@ -379,6 +468,20 @@ if (!$mysqli->connect_errno) {
             `;
             return card;
         }
+
+        // تحميل البيانات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchMatchesForDate(formatDate(new Date()), 0);
+        });
+        
+        // تحديث دوري كل 30 ثانية
+        setInterval(() => {
+            const activeBtn = document.querySelector('.date-nav button.active');
+            const offset = parseInt(activeBtn.dataset.dayOffset);
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + offset);
+            fetchMatchesForDate(formatDate(targetDate), 0);
+        }, 30000);
     </script>
 </body>
 </html>

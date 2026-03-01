@@ -9,6 +9,6 @@ if ($id > 0) {
     $stmt->bind_param("i", $id);
     $stmt->execute();
 }
-header("Location: categories.php");
+header("Location: dashboard.php#categories");
 exit();
 ?>

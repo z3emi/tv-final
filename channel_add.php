@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // سكريبت البايثون هو المسؤول الآن
             
             $_SESSION['message'] = "<div class='alert alert-success'>تمت إضافة القناة بنجاح.</div>";
-            header("Location: channels.php");
+            header("Location: dashboard.php#channels");
             exit();
         } else {
             $message = "<div class='alert alert-danger'>فشل إضافة القناة: " . $stmt->error . "</div>";
@@ -114,7 +114,7 @@ $categories_result = $mysqli->query("SELECT * FROM categories ORDER BY name ASC"
                     </div>
                     
                     <button type="submit" class="btn btn-success">💾 حفظ القناة</button>
-                    <a href="channels.php" class="btn btn-secondary">↩️ إلغاء</a>
+                    <a href="dashboard.php" class="btn btn-secondary">↩️ إلغاء</a>
                 </form>
             </div>
         </div>

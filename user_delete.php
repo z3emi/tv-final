@@ -13,6 +13,6 @@ if ($id > 1) {
     $stmt->bind_param("i", $id);
     $stmt->execute();
 }
-header("Location: users.php");
+header("Location: dashboard.php#users");
 exit();
 ?>

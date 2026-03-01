@@ -11,6 +11,6 @@ while ($row = $res->fetch_assoc()) {
 }
 file_put_contents("channels.txt", implode(PHP_EOL, $channels) . PHP_EOL);
 
-header("Location: channels.php");
+header("Location: dashboard.php#channels");
 exit();
 ?>

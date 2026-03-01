@@ -1,9 +1,4 @@
 <?php
-// proxy.php — يقبل url مباشرة أو u بصيغة base64url
-// أمثلة:
-//   proxy.php?url=https://yariga7.online/upload/images/logo1.zip
-//   proxy.php?u=BASE64URL(...)
-
 function b64u_dec($s){
   $s = strtr((string)$s, '-_', '+/');
   $pad = strlen($s) % 4;

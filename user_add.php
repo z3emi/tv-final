@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sss", $username, $hashed_password, $role);
         
         if ($stmt->execute()) {
-            header("Location: users.php");
+            header("Location: dashboard.php#users");
             exit();
         } else {
             $error = "اسم المستخدم موجود بالفعل.";
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form-text">المحرر يمكنه إدارة القنوات والتصنيفات فقط. المدير يمكنه التحكم بكل شيء.</div>
                     </div>
                     <button type="submit" class="btn btn-success">إضافة المستخدم</button>
-                    <a href="users.php" class="btn btn-secondary">إلغاء</a>
+                    <a href="dashboard.php" class="btn btn-secondary">إلغاء</a>
                 </form>
             </div>
         </div>

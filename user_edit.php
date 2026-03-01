@@ -11,7 +11,7 @@ $id = $_GET['id'] ?? 0;
 $message = '';
 
 if ($id == 0) {
-    header("Location: users.php");
+    header("Location: dashboard.php#users");
     exit();
 }
 
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $user_result = $mysqli->query("SELECT * FROM users WHERE id = $id");
 if($user_result->num_rows == 0){
-    header("Location: users.php");
+    header("Location: dashboard.php#users");
     exit();
 }
 $user = $user_result->fetch_assoc();
@@ -88,7 +88,7 @@ $user = $user_result->fetch_assoc();
                         <?php endif; ?>
                     </div>
                     <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                    <a href="users.php" class="btn btn-secondary">العودة للمستخدمين</a>
+                    <a href="dashboard.php" class="btn btn-secondary">العودة للمستخدمين</a>
                 </form>
             </div>
         </div>

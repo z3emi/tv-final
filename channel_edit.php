@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($stmt->execute()) {
             $_SESSION['message'] = "<div class='alert alert-success'>تم تحديث القناة بنجاح.</div>";
-            header("Location: channels.php");
+            header("Location: dashboard.php#channels");
             exit();
         } else {
             $message = "<div class='alert alert-danger'>فشل تحديث القناة: " . $stmt->error . "</div>";
@@ -121,7 +121,7 @@ $categories_result = $mysqli->query("SELECT * FROM categories ORDER BY name ASC"
     <div id="content" class="p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h4 fw-bold mb-0"><i class="bi bi-pencil-square me-2 text-primary"></i>تعديل قناة: <?= htmlspecialchars($channel['name']) ?></h1>
-            <a href="channels.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> العودة</a>
+            <a href="dashboard.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> العودة</a>
         </div>
 
         <?php if (!empty($message)) echo $message; ?>
