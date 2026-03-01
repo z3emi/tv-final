@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // استلام البيانات من الفورم المعدل
     $name = $_POST['name'] ?? '';
     $url = $_POST['url'] ?? ''; // رابط البث أصبح الآن هو رابط المصدر
+    $audio_url = $_POST['audio_url'] ?? ''; // رابط الصوت منفصل
     $category_id = $_POST['category_id'] ?? 0;
     $is_direct = $_POST['is_direct'] ?? 0; // الحقل الجديد
     $is_active = $_POST['active'] ?? 1;
@@ -37,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($message)) {
         // تم تحديث استعلام SQL ليشمل الحقول الجديدة
         // تم تغيير اسم العمود من url إلى url ليتوافق مع قاعدة البيانات
-        $stmt = $mysqli->prepare("INSERT INTO channels (name, url, image_url, category_id, is_active, is_direct) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $mysqli->prepare("INSERT INTO channels (name, url, audio_url, image_url, category_id, is_active, is_direct) VALUES (?, ?, ?, ?, ?, ?, ?)");
         // تم تحديث أنواع المتغيرات
-        $stmt->bind_param("sssiii", $name, $url, $image_path, $category_id, $is_active, $is_direct);
+        $stmt->bind_param("ssssiiii", $name, $url, $audio_url, $image_path, $category_id, $is_active, $is_direct);
 
         if ($stmt->execute()) {
             // --- تم حذف كود تشغيل FFmpeg من هنا ---
@@ -80,8 +81,13 @@ $categories_result = $mysqli->query("SELECT * FROM categories ORDER BY name ASC"
                         <input id="name" name="name" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label for="url" class="form-label">رابط المصدر (Source URL):</label>
+                        <label for="url" class="form-label">رابط البث (Video URL):</label>
                         <textarea id="url" name="url" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="audio_url" class="form-label">رابط الصوت (Audio URL) - اختياري:</label>
+                        <textarea id="audio_url" name="audio_url" class="form-control" rows="3"></textarea>
+                        <div class="form-text">إذا تركت هذا الحقل فارغاً، سيتم استخدام رابط البث كمصدر صوت</div>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">صورة القناة:</label>

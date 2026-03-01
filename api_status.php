@@ -125,11 +125,27 @@ function collect_server_stats(): array {
         'network_tx_total_text' => 'غير متاح',
     ];
 
+    // حساب عدد المعالجات
+    $numCpus = 1;
+    if (is_readable('/proc/cpuinfo')) {
+        $cpuinfo = file_get_contents('/proc/cpuinfo');
+        $numCpus = max(1, (int)preg_match_all('/^processor\s*:/m', $cpuinfo));
+    } else {
+        if (function_exists('shell_exec')) {
+            $numCpusShell = (int)@shell_exec('nproc');
+            if ($numCpusShell > 0) {
+                $numCpus = $numCpusShell;
+            }
+        }
+    }
+
     if (function_exists('sys_getloadavg')) {
         $load = sys_getloadavg();
         if (isset($load[0])) {
             $stats['cpu_load_1m'] = (float)$load[0];
-            $stats['cpu_load_text'] = number_format($load[0], 2);
+            // تحويل الحمل إلى نسبة مئوية بناءً على عدد المعالجات
+            $cpuPercent = min(100, ($load[0] / $numCpus) * 100);
+            $stats['cpu_load_text'] = number_format($cpuPercent, 1) . '%';
         }
     }
 

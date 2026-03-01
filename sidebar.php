@@ -35,26 +35,26 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?= in_array($current_page, ['channels.php', 'channel_add.php', 'channel_edit.php', 'import_playlist.php']) ? 'active' : '' ?>" href="channels.php">
+                <a class="nav-link <?= $current_page == 'dashboard.php' ? 'active' : '' ?>" href="dashboard.php#channels">
                     <i class="bi bi-film me-1"></i> إدارة القنوات
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?= in_array($current_page, ['categories.php', 'category_edit.php']) ? 'active' : '' ?>" href="categories.php">
+                <a class="nav-link <?= $current_page == 'dashboard.php' ? 'active' : '' ?>" href="dashboard.php#categories">
                     <i class="bi bi-bookmarks-fill me-1"></i> التصنيفات
                 </a>
             </li>
 
             <?php if ($user_role === 'admin'): ?>
                 <li class="nav-item">
-                    <a class="nav-link <?= in_array($current_page, ['users.php', 'user_add.php', 'user_edit.php']) ? 'active' : '' ?>" href="users.php">
+                    <a class="nav-link <?= $current_page == 'dashboard.php' ? 'active' : '' ?>" href="dashboard.php#users">
                         <i class="bi bi-people-fill me-1"></i> المستخدمين
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link <?= $current_page == 'settings.php' ? 'active' : '' ?>" href="settings.php">
+                    <a class="nav-link <?= $current_page == 'dashboard.php' ? 'active' : '' ?>" href="dashboard.php#settings">
                         <i class="bi bi-gear-fill me-1"></i> الإعدادات
                     </a>
                 </li>

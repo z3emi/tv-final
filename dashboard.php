@@ -79,9 +79,6 @@ while($row = $settings_result->fetch_assoc()) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .nav-tabs .nav-link { color: #666; border: none; }
-        .nav-tabs .nav-link.active { background-color: #f8f9fa; color: #000; border-bottom: 3px solid #0d6efd; }
-        .nav-tabs { border-bottom: 1px solid #dee2e6; }
         .perf-card .label { font-size: .85rem; color: #6c757d; }
         .perf-card .value { font-weight: 700; font-size: 1.1rem; word-break: break-word; direction: ltr; unicode-bidi: plaintext; }
         .perf-card .sub { font-size: .8rem; color: #6c757d; direction: ltr; unicode-bidi: plaintext; margin-top: .25rem; }
@@ -91,7 +88,6 @@ while($row = $settings_result->fetch_assoc()) {
         .btn-action { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; }
         .table-dark th { color: #fff !important; background-color: #212529 !important; }
         .url-truncate { word-break: break-all; white-space: normal; max-width: 200px; text-align: start; }
-        .tab-content { padding-top: 1.5rem; }
     </style>
 </head>
 <body>
@@ -142,93 +138,60 @@ while($row = $settings_result->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- ===== معلومات السيرفر ===== -->
-        <div class="row g-3 mb-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0 perf-card">
-                    <div class="card-body">
-                        <div class="label mb-1"><i class="bi bi-cpu me-1"></i>حمل المعالج</div>
-                        <div class="value" id="server-cpu-load">--</div>
+            <div id="live" role="tabpanel">
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm border-0 perf-card">
+                            <div class="card-body">
+                                <div class="label mb-1"><i class="bi bi-cpu me-1"></i>حمل المعالج</div>
+                                <div class="value" id="server-cpu-load">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm border-0 perf-card">
+                            <div class="card-body">
+                                <div class="label mb-1"><i class="bi bi-memory me-1"></i>استخدام الذاكرة</div>
+                                <div class="value" id="server-memory-usage">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm border-0 perf-card">
+                            <div class="card-body">
+                                <div class="label mb-1"><i class="bi bi-hdd-network me-1"></i>استخدام القرص</div>
+                                <div class="value" id="server-disk-usage">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm border-0 perf-card">
+                            <div class="card-body">
+                                <div class="label mb-1"><i class="bi bi-arrow-down-circle me-1"></i>الاستقبال RX</div>
+                                <div class="value" id="server-network-rx">--</div>
+                                <div class="sub" id="server-network-rx-total">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm border-0 perf-card">
+                            <div class="card-body">
+                                <div class="label mb-1"><i class="bi bi-arrow-up-circle me-1"></i>الإرسال TX</div>
+                                <div class="value" id="server-network-tx">--</div>
+                                <div class="sub" id="server-network-tx-total">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card shadow-sm border-0 perf-card">
+                            <div class="card-body">
+                                <div class="label mb-1"><i class="bi bi-clock-history me-1"></i>مدة التشغيل</div>
+                                <div class="value muted" id="server-uptime">--</div>
+                                <div class="sub" id="server-network-interface">--</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0 perf-card">
-                    <div class="card-body">
-                        <div class="label mb-1"><i class="bi bi-memory me-1"></i>استخدام الذاكرة</div>
-                        <div class="value" id="server-memory-usage">--</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0 perf-card">
-                    <div class="card-body">
-                        <div class="label mb-1"><i class="bi bi-hdd-network me-1"></i>استخدام القرص</div>
-                        <div class="value" id="server-disk-usage">--</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0 perf-card">
-                    <div class="card-body">
-                        <div class="label mb-1"><i class="bi bi-arrow-down-circle me-1"></i>الاستقبال RX</div>
-                        <div class="value" id="server-network-rx">--</div>
-                        <div class="sub" id="server-network-rx-total">--</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0 perf-card">
-                    <div class="card-body">
-                        <div class="label mb-1"><i class="bi bi-arrow-up-circle me-1"></i>الإرسال TX</div>
-                        <div class="value" id="server-network-tx">--</div>
-                        <div class="sub" id="server-network-tx-total">--</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-sm border-0 perf-card">
-                    <div class="card-body">
-                        <div class="label mb-1"><i class="bi bi-clock-history me-1"></i>مدة التشغيل</div>
-                        <div class="value muted" id="server-uptime">--</div>
-                        <div class="sub" id="server-network-interface">--</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== التبويبات الرئيسية ===== -->
-        <ul class="nav nav-tabs mb-4" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="live-tab" data-bs-toggle="tab" data-bs-target="#live" type="button" role="tab">
-                    <i class="bi bi-play-circle me-2"></i>البث المباشر
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="channels-tab" data-bs-toggle="tab" data-bs-target="#channels" type="button" role="tab">
-                    <i class="bi bi-tv me-2"></i>إدارة القنوات
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories" type="button" role="tab">
-                    <i class="bi bi-bookmarks me-2"></i>التصنيفات
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
-                    <i class="bi bi-people me-2"></i>المستخدمين
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab">
-                    <i class="bi bi-gear me-2"></i>الإعدادات
-                </button>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <!-- ===== تبويب البث المباشر ===== -->
-            <div class="tab-pane fade show active" id="live" role="tabpanel">
                 <div class="card shadow-sm border-0">
                     <div class="card-header bg-light border-0 py-3 d-flex justify-content-between">
                         <h5 class="mb-0">مراقبة البث المباشر</h5>
@@ -245,7 +208,7 @@ while($row = $settings_result->fetch_assoc()) {
                                         <th>وقت التشغيل</th>
                                         <th>إعادات</th>
                                         <th>رابط البث</th>
-                                        <th>إجراءات</th>
+                                        <th>الإجراءات</th>
                                     </tr>
                                 </thead>
                                 <tbody id="channels-status-table">
@@ -258,7 +221,7 @@ while($row = $settings_result->fetch_assoc()) {
             </div>
 
             <!-- ===== تبويب إدارة القنوات ===== -->
-            <div class="tab-pane fade" id="channels" role="tabpanel">
+            <div id="channels" role="tabpanel">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">قائمة القنوات</h5>
                     <div class="d-flex gap-2">
@@ -291,7 +254,7 @@ while($row = $settings_result->fetch_assoc()) {
             </div>
 
             <!-- ===== تبويب التصنيفات ===== -->
-            <div class="tab-pane fade" id="categories" role="tabpanel">
+            <div id="categories" role="tabpanel">
                 <div class="row g-3">
                     <div class="col-lg-8">
                         <div class="card shadow-sm border-0">
@@ -341,7 +304,7 @@ while($row = $settings_result->fetch_assoc()) {
             </div>
 
             <!-- ===== تبويب المستخدمين ===== -->
-            <div class="tab-pane fade" id="users" role="tabpanel">
+            <div id="users" role="tabpanel">
                 <div class="mb-3">
                     <a href="user_add.php" class="btn btn-success"><i class="bi bi-plus-circle me-1"></i>إضافة مستخدم</a>
                 </div>
@@ -388,7 +351,7 @@ while($row = $settings_result->fetch_assoc()) {
             </div>
 
             <!-- ===== تبويب الإعدادات ===== -->
-            <div class="tab-pane fade" id="settings" role="tabpanel">
+            <div id="settings" role="tabpanel">
                 <div class="card shadow-sm border-0" style="max-width: 600px;">
                     <div class="card-header bg-light border-0 py-3">
                         <h5 class="mb-0">إعدادات الموقع</h5>
@@ -406,6 +369,34 @@ while($row = $settings_result->fetch_assoc()) {
                         </form>
                     </div>
                 </div>
+            </div>
+    </div>
+</div>
+
+<!-- ===== Modal تعديل رابط البث ===== -->
+<div class="modal fade" id="editStreamModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title">تعديل رابط البث - <span id="editStreamChannelName"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editStreamChannelId">
+                <div class="mb-3">
+                    <label class="form-label">رابط القناة (URL)</label>
+                    <textarea id="editStreamChannelUrl" class="form-control" rows="3" placeholder="مثال: http://example.com/stream.m3u8" required></textarea>
+                    <div class="form-text">رابط المصدر الرئيسي للبث</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">رابط الصوت (اختياري)</label>
+                    <textarea id="editStreamAudioUrl" class="form-control" rows="3" placeholder="اتركه فارغاً لاستخدام رابط القناة"></textarea>
+                    <div class="form-text">إذا تركت هذا الحقل فارغاً، سيتم استخدام رابط القناة كمصدر للصوت</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary" onclick="saveStreamUrl()">حفظ</button>
             </div>
         </div>
     </div>
@@ -465,6 +456,9 @@ async function fetchStatus() {
                         <td><span class="badge bg-dark">${channel.restarts}</span></td>
                         <td><small>${channel.stream_link}</small></td>
                         <td>
+                            <button class="btn btn-sm btn-info me-1" onclick="openEditStreamModal(${channel.id}, '${channel.name}')" title="تعديل رابط البث">
+                                <i class="bi bi-link-45deg"></i>
+                            </button>
                             <button class="btn btn-sm btn-warning" onclick="restartChannel(${channel.id})" title="إعادة تشغيل">
                                 <i class="bi bi-arrow-clockwise"></i>
                             </button>
@@ -474,7 +468,7 @@ async function fetchStatus() {
                 statusTableBody.innerHTML += row;
             });
         } else {
-            statusTableBody.innerHTML = '<tr><td colspan="7" class="text-center p-4">لا توجد قنوات</td></tr>';
+            statusTableBody.innerHTML = '<tr><td colspan="8" class="text-center p-4">لا توجد قنوات</td></tr>';
         }
     } catch (error) {
         console.error('Fetch error:', error);
@@ -542,6 +536,68 @@ document.getElementById('searchChannels').addEventListener('input', function(e) 
 // تحديث العدادات
 document.getElementById('category-count').textContent = <?= $mysqli->query("SELECT COUNT(*) as cnt FROM categories")->fetch_assoc()['cnt'] ?>;
 document.getElementById('user-count').textContent = <?= $mysqli->query("SELECT COUNT(*) as cnt FROM users")->fetch_assoc()['cnt'] ?>;
+
+// ===== تعديل رابط البث =====
+function openEditStreamModal(channelId, channelName) {
+    document.getElementById('editStreamChannelId').value = channelId;
+    document.getElementById('editStreamChannelName').textContent = channelName;
+    document.getElementById('editStreamChannelUrl').value = '';
+    document.getElementById('editStreamAudioUrl').value = '';
+    
+    const modal = new bootstrap.Modal(document.getElementById('editStreamModal'));
+    modal.show();
+}
+
+function saveStreamUrl() {
+    const channelId = parseInt(document.getElementById('editStreamChannelId').value);
+    const channelUrl = document.getElementById('editStreamChannelUrl').value.trim();
+    const audioUrl = document.getElementById('editStreamAudioUrl').value.trim();
+    
+    if (!channelUrl) {
+        alert('رابط القناة مطلوب');
+        return;
+    }
+    
+    const form = new FormData();
+    form.append('channel_id', channelId);
+    form.append('channel_url', channelUrl);
+    form.append('audio_url', audioUrl);
+    
+    fetch('api_update_stream.php', { method: 'POST', body: form })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('تم تحديث رابط البث بنجاح');
+                bootstrap.Modal.getInstance(document.getElementById('editStreamModal')).hide();
+                fetchStatus();
+            } else {
+                alert('خطأ: ' + (data.message || 'حدث خطأ'));
+            }
+        })
+        .catch(err => alert('خطأ: ' + err));
+}
+
+function showSection(sectionId) {
+    // إخفاء جميع الأقسام
+    document.querySelectorAll('#live, #channels, #categories, #users, #settings').forEach(section => {
+        section.style.display = 'none';
+    });
+    // إظهار القسم المختار
+    const targetSection = document.getElementById(sectionId || 'live');
+    if (targetSection) targetSection.style.display = 'block';
+}
+
+// عند تحميل الصفحة أو تغيير الـ Hash
+window.addEventListener('hashchange', function() {
+    const hash = window.location.hash.substring(1) || 'live';
+    showSection(hash);
+});
+
+// عند تحميل الصفحة للمرة الأولى
+document.addEventListener('DOMContentLoaded', function() {
+    const hash = window.location.hash.substring(1) || 'live';
+    showSection(hash);
+});
 
 // تحديث دوري
 fetchStatus();

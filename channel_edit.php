@@ -38,13 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($message)) {
         $name = $_POST['name'];
         $url = $_POST['url'];
+        $audio_url = $_POST['audio_url'] ?? '';
         $category_id = $_POST['category_id'];
         $is_active = isset($_POST['is_active']) ? 1 : 0;
         $is_direct = isset($_POST['is_direct']) ? (int) $_POST['is_direct'] : 0;
         $channel_id = $_POST['id'];
 
-        $stmt = $mysqli->prepare("UPDATE channels SET name=?, url=?, image_url=?, category_id=?, is_active=?, is_direct=? WHERE id=?");
-        $stmt->bind_param("sssiiii", $name, $url, $image_path, $category_id, $is_active, $is_direct, $channel_id);
+        $stmt = $mysqli->prepare("UPDATE channels SET name=?, url=?, audio_url=?, image_url=?, category_id=?, is_active=?, is_direct=? WHERE id=?");
+        $stmt->bind_param("ssssiiiii", $name, $url, $audio_url, $image_path, $category_id, $is_active, $is_direct, $channel_id);
         
         if ($stmt->execute()) {
             $_SESSION['message'] = "<div class='alert alert-success'>تم تحديث القناة بنجاح.</div>";
@@ -140,9 +141,14 @@ $categories_result = $mysqli->query("SELECT * FROM categories ORDER BY name ASC"
                                 <label for="name" class="form-label">اسم القناة:</label>
                                 <input id="name" name="name" class="form-control" value="<?= htmlspecialchars($channel['name']) ?>" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="url" class="form-label">رابط المصدر (Source URL):</label>
+                        <div class="mb-3">
+                                <label for="url" class="form-label">رابط البث (Video URL):</label>
                                 <textarea id="url" name="url" class="form-control" rows="4" required><?= htmlspecialchars($channel['url']) ?></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="audio_url" class="form-label">رابط الصوت (Audio URL) - اختياري:</label>
+                                <textarea id="audio_url" name="audio_url" class="form-control" rows="4"><?= htmlspecialchars($channel['audio_url'] ?? '') ?></textarea>
+                                <div class="form-text">إذا تركت هذا الحقل فارغاً، سيتم استخدام رابط البث كمصدر صوت</div>
                             </div>
                             <div class="mb-3">
                                 <label for="category_id" class="form-label">التصنيف:</label>
