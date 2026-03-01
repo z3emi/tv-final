@@ -49,6 +49,63 @@ function format_uptime_seconds(int $seconds): string {
     return sprintf('%02d:%02d', $hours, $minutes);
 }
 
+function format_rate_value(float $bytesPerSecond): string {
+    if ($bytesPerSecond <= 0) {
+        return '0 B/s';
+    }
+
+    return format_bytes_value($bytesPerSecond) . '/s';
+}
+
+function get_network_interface_stats(): ?array {
+    if (!is_readable('/proc/net/dev')) {
+        return null;
+    }
+
+    $lines = @file('/proc/net/dev', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if (!is_array($lines)) {
+        return null;
+    }
+
+    $best = null;
+    foreach ($lines as $line) {
+        if (strpos($line, ':') === false) {
+            continue;
+        }
+
+        [$iface, $rawStats] = explode(':', $line, 2);
+        $iface = trim($iface);
+        if ($iface === '' || $iface === 'lo') {
+            continue;
+        }
+
+        $parts = preg_split('/\s+/', trim($rawStats));
+        if (!is_array($parts) || count($parts) < 9) {
+            continue;
+        }
+
+        $rxBytes = (float)$parts[0];
+        $txBytes = (float)$parts[8];
+        $score = $rxBytes + $txBytes;
+
+        if ($best === null || $score > $best['score']) {
+            $best = [
+                'interface' => $iface,
+                'rx_bytes' => $rxBytes,
+                'tx_bytes' => $txBytes,
+                'score' => $score,
+            ];
+        }
+    }
+
+    if ($best === null) {
+        return null;
+    }
+
+    unset($best['score']);
+    return $best;
+}
+
 function collect_server_stats(): array {
     $stats = [
         'cpu_load_1m' => null,
@@ -59,6 +116,13 @@ function collect_server_stats(): array {
         'disk_used_text' => 'غير متاح',
         'uptime_seconds' => null,
         'uptime_text' => 'غير متاح',
+        'network_interface' => 'غير متاح',
+        'network_rx_rate_bps' => 0,
+        'network_tx_rate_bps' => 0,
+        'network_rx_rate_text' => '0 B/s',
+        'network_tx_rate_text' => '0 B/s',
+        'network_rx_total_text' => 'غير متاح',
+        'network_tx_total_text' => 'غير متاح',
     ];
 
     if (function_exists('sys_getloadavg')) {
@@ -119,6 +183,46 @@ function collect_server_stats(): array {
             $uptimeSeconds = (int)floor((float)$parts[0]);
             $stats['uptime_seconds'] = $uptimeSeconds;
             $stats['uptime_text'] = format_uptime_seconds($uptimeSeconds);
+        }
+    }
+
+    $network = get_network_interface_stats();
+    if ($network !== null) {
+        $stats['network_interface'] = $network['interface'];
+        $stats['network_rx_total_text'] = format_bytes_value($network['rx_bytes']);
+        $stats['network_tx_total_text'] = format_bytes_value($network['tx_bytes']);
+
+        $cachePath = LIVE_ROOT . '/network_rate_cache.json';
+        $now = microtime(true);
+        $prev = null;
+
+        if (is_readable($cachePath)) {
+            $rawCache = @file_get_contents($cachePath);
+            $decoded = json_decode((string)$rawCache, true);
+            if (is_array($decoded)) {
+                $prev = $decoded;
+            }
+        }
+
+        $sample = [
+            'timestamp' => $now,
+            'interface' => $network['interface'],
+            'rx_bytes' => $network['rx_bytes'],
+            'tx_bytes' => $network['tx_bytes'],
+        ];
+        @file_put_contents($cachePath, json_encode($sample), LOCK_EX);
+
+        if (is_array($prev)
+            && ($prev['interface'] ?? '') === $network['interface']
+            && isset($prev['timestamp'], $prev['rx_bytes'], $prev['tx_bytes'])) {
+            $elapsed = max(0.001, $now - (float)$prev['timestamp']);
+            $rxDelta = max(0, (float)$network['rx_bytes'] - (float)$prev['rx_bytes']);
+            $txDelta = max(0, (float)$network['tx_bytes'] - (float)$prev['tx_bytes']);
+
+            $stats['network_rx_rate_bps'] = round($rxDelta / $elapsed, 2);
+            $stats['network_tx_rate_bps'] = round($txDelta / $elapsed, 2);
+            $stats['network_rx_rate_text'] = format_rate_value($stats['network_rx_rate_bps']);
+            $stats['network_tx_rate_text'] = format_rate_value($stats['network_tx_rate_bps']);
         }
     }
 
