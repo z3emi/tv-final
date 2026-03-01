@@ -11,20 +11,15 @@ if (!isset($_SESSION['user'])) {
 // 3. استخدام متغير الاتصال الموحد $mysqli من config.php
 $website_title = $mysqli->query("SELECT setting_value FROM settings WHERE setting_key = 'website_title'")->fetch_assoc()['setting_value'] ?? 'Admin Panel';
 
-// 4. الاستعلام المحسّن لعد المشاهدين وتحسين سرعة تحميل الصفحة
+// 4. الاستعلام المحسّن بدون تتبع المشاهدين
 $channels_result = $mysqli->query("
     SELECT
         c.*,
-        cat.name AS category_name,
-        COUNT(v.viewer_uid) AS view_count
+        cat.name AS category_name
     FROM
         channels c
     LEFT JOIN
         categories cat ON c.category_id = cat.id
-    LEFT JOIN
-        viewers v ON c.id = v.channel_id AND v.last_active > NOW() - INTERVAL 20 SECOND
-    GROUP BY
-        c.id
     ORDER BY
         c.id DESC
 ");
@@ -120,25 +115,12 @@ $categories_result = $mysqli->query("SELECT * FROM categories ORDER BY name ASC"
                                     <small class="text-muted"><?= htmlspecialchars($c['category_name'] ?? 'N/A') ?></small>
                                 </div>
                             </div>
-                            <div class="col-md-3 stats-group">
-                                <div class="d-flex justify-content-around text-center">
-                                    <div id="views-<?= $c['id'] ?>">
-                                        <small class="text-muted d-block">المشاهدون</small>
-                                        <strong class="fs-5"><?= number_format($c['view_count']) ?></strong>
-                                    </div>
-                                    <div id="traffic-<?= $c['id'] ?>">
-                                        <small class="text-muted d-block">الترافيك</small>
-                                        <div class="spinner-border spinner-border-sm mt-1" role="status"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <div class="d-flex align-items-center justify-content-end gap-2">
                                     <span class="badge fs-6 rounded-pill <?= $c['is_active'] ? 'bg-success-subtle text-success-emphasis' : 'bg-danger-subtle text-danger-emphasis' ?>">
                                         <?= $c['is_active'] ? 'مفعلة' : 'معطلة' ?>
                                     </span>
                                     <div class="vr mx-2"></div>
-                                    <a href="channel_log.php?id=<?= $c['id'] ?>" class="btn btn-sm btn-outline-secondary" title="سجل القناة"><i class="bi bi-clipboard-data-fill"></i></a>
                                     <a href="channel_edit.php?id=<?= $c['id'] ?>" class="btn btn-sm btn-outline-primary" title="تعديل"><i class="bi bi-pencil-square"></i></a>
                                     <a href="channel_delete.php?id=<?= $c['id'] ?>" class="btn btn-sm btn-outline-danger" title="حذف" onclick="return confirm('هل أنت متأكد؟')"><i class="bi bi-trash3-fill"></i></a>
                                 </div>
@@ -162,25 +144,6 @@ $categories_result = $mysqli->query("SELECT * FROM categories ORDER BY name ASC"
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    function updateStats() {
-        fetch('api_channel_stats.php')
-            .then(response => response.ok ? response.json() : Promise.reject('Network response was not ok'))
-            .then(data => {
-                const statsData = data.stats;
-                for (const channelId in statsData) {
-                    const stats = statsData[channelId];
-                    const viewsCell = document.getElementById(`views-${channelId}`);
-                    const trafficCell = document.getElementById(`traffic-${channelId}`);
-                    if (viewsCell) viewsCell.innerHTML = `<small class="text-muted d-block">المشاهدون</small><strong class="fs-5">${new Intl.NumberFormat().format(stats.view_count)}</strong>`;
-                    if (trafficCell) trafficCell.innerHTML = `<small class="text-muted d-block">الترافيك</small><strong class="fs-5">${stats.traffic}</strong>`;
-                }
-            })
-            .catch(error => console.error('Error fetching stats:', error));
-    }
-    
-    // يمكنك تعديل سرعة التحديث هنا (مثلاً 3000 لـ 3 ثوانٍ)
-    setInterval(updateStats, 5000);
-
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
     const channelRows = document.querySelectorAll('.channel-row');

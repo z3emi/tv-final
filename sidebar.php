@@ -59,11 +59,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link <?= in_array($current_page, ['report_viewers.php', 'export_active_viewers.php']) ? 'active' : '' ?>" href="report_viewers.php">
-                        <i class="bi bi-bar-chart-line-fill me-1"></i> التقارير
-                    </a>
-                </li>
             <?php endif; ?>
         </ul>
 

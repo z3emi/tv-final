@@ -370,16 +370,6 @@ document.addEventListener('visibilitychange', () => {
         player.src({ src: sourceUrl, type: sourceType });
     }
 
-    function getViewerId() { 
-        let viewerId = localStorage.getItem('viewer_uid'); 
-        if (!viewerId) { 
-            viewerId = 'viewer_' + Math.random().toString(36).substr(2, 9) + Date.now(); 
-            localStorage.setItem('viewer_uid', viewerId); 
-        } 
-        return viewerId; 
-    }
-    const VIEWER_ID = getViewerId();
-
     // تحسين كشف Safari و iOS
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
@@ -854,18 +844,6 @@ document.addEventListener('visibilitychange', () => {
         });
     }
     
-    // تتبع المشاهدة
-    let trackingInterval = setInterval(() => {
-        fetch('track_view.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: new URLSearchParams({
-                channel_id: CHANNEL_ID,
-                viewer_id: VIEWER_ID
-            })
-        }).catch(() => {});
-    }, 8000); // أقل تكراراً على الموبايل
-
     // مستمعي الأحداث المحسنة للـ iOS
     let loadStartAt = 0;
     let initialDelayApplied = false;
@@ -1011,9 +989,6 @@ document.addEventListener('visibilitychange', () => {
     // تنظيف عند إغلاق الصفحة
     window.addEventListener('beforeunload', () => {
         console.log('Page unloading, cleaning up...');
-        if (trackingInterval) {
-            clearInterval(trackingInterval);
-        }
         NetworkWatchdog.clearTimers();
         if (tipInterval) {
             clearInterval(tipInterval);

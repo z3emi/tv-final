@@ -11,7 +11,6 @@ if ($res && $row = $res->fetch_assoc()) {
 
 $total_channels = 0;
 $active_channels = 0;
-$total_viewers = 0;
 
 $statsRes = $mysqli->query("SELECT COUNT(*) AS total_channels, SUM(is_active = 1) AS active_channels FROM channels");
 if ($statsRes && $stats = $statsRes->fetch_assoc()) {
@@ -19,10 +18,6 @@ if ($statsRes && $stats = $statsRes->fetch_assoc()) {
     $active_channels = (int)($stats['active_channels'] ?? 0);
 }
 
-$viewersRes = $mysqli->query("SELECT COUNT(*) AS total_viewers FROM viewers WHERE last_active > NOW() - INTERVAL 20 SECOND");
-if ($viewersRes && $vw = $viewersRes->fetch_assoc()) {
-    $total_viewers = (int)($vw['total_viewers'] ?? 0);
-}
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -77,8 +72,8 @@ if ($viewersRes && $vw = $viewersRes->fetch_assoc()) {
                 <div class="card shadow-sm border-0 h-100 nav-card">
                     <div class="card-body text-center">
                         <i class="bi bi-people fs-1 text-warning"></i>
-                        <h6 class="text-muted mt-2 mb-1">المشاهدون الآن</h6>
-                        <h3 class="mb-0" id="live-viewers-count"><?= number_format($total_viewers) ?></h3>
+                        <h6 class="text-muted mt-2 mb-1">قنوات تعمل الآن</h6>
+                        <h3 class="mb-0" id="live-viewers-count"><?= number_format($active_channels) ?></h3>
                     </div>
                 </div>
             </div>
